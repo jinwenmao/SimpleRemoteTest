@@ -1,0 +1,2849 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://blog.csdn.net/evenhbz/article/details/83984149"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+        <meta name="csdn-baidu-search"  content='{"autorun":true,"install":true,"keyword":"远程调用——Remoting（C# ）（转） - My Code Library"}'>
+    
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+    <title>远程调用——Remoting（C# ）（转） - My Code Library - CSDN博客</title>
+
+        
+                    <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/detail-c9f101d6a9.min.css">
+            
+            <script type="application/ld+json">{"@context":"https:\/\/ziyuan.baidu.com\/contexts\/cambrian.jsonld","@id":"https:\/\/blog.csdn.net\/evenhbz\/article\/details\/83984149","appid":"1563894916825412","title":"\u8fdc\u7a0b\u8c03\u7528\u2014\u2014Remoting\uff08C# \uff09\uff08\u8f6c\uff09 - My Code Library","images":["http:\/\/www.cnblogs.com\/Images\/OutliningIndicators\/None.gif","http:\/\/www.cnblogs.com\/Images\/OutliningIndicators\/ExpandedBlockStart.gif","http:\/\/www.cnblogs.com\/Images\/OutliningIndicators\/InBlock.gif"],"pubDate":"2019-05-04T18:38:32"}</script>
+        
+          <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/themes/skin3-template/skin3-template-9b39979775.min.css">
+        <script type="text/javascript">
+        var username = "evenhbz";
+        var userPermission = false;
+        var blog_address = "https://blog.csdn.net/evenhbz";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = "jinwenmao";
+        var currentUserPermission = false;
+        var isShowAds = true;
+        var isOwner = false;
+        var loginUrl = "http://passport.csdn.net/account/login?from=https://blog.csdn.net/evenhbz/article/details/83984149"
+        var blogUrl = "https://blog.csdn.net/";
+        //页面皮肤样式
+        var curSkin = "skin3-template";
+        // 第四范式所需数据
+        var articleTitles = "远程调用——Remoting（C# ）（转） - My Code Library";
+        var articleID = "83984149";
+        
+        var nickName = "evenhbz";
+        var isCorporate = false;
+        var subDomainBlogUrl = "https://blog.csdn.net/"
+        var digg_base_url = "https://blog.csdn.net/evenhbz/phoenix/comment";
+        var articleDetailUrl = "https://blog.csdn.net/evenhbz/article/details/83984149";
+    </script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.6.js"></script>
+    <script src="//g.csdnimg.cn/fixed-sidebar/1.1.3/fixed-sidebar.js" type="text/javascript"></script>
+    <!-- 新版上报 -->
+      <script src="//g.csdnimg.cn/track/1.2.4/track.js" type="text/javascript"></script>
+    <!-- 新版上报end -->
+
+    <link rel="stylesheet" href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css">
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+</head>
+<!-- nodata 第三栏接口无数据时样式不变 -->
+<body class="nodata " > 
+    <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+    <script id="toolbar-tpl-scriptId" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+<div id="kp_box_476" data-pid="476" data-track-view='{"mod":"kp_popu_476-923","con":",,"}' data-track-click='{"mod":"kp_popu_476-923","con":",,"}'><script src="//csdnimg.cn/public/common/indexSuperise/1.0.3/indexSuperise.js?20190103190825"></script>
+<script>
+ window.csdn.indexSuperise({
+      smallMoveImg: '//img-ads.csdn.net/2019/201904191712004256.png',
+      bigMoveImg: '//img-ads.csdn.net/2019/201904191711482933.png',
+     link:'//edu.csdn.net/topic/ai30?utm_source=blogpopup',
+boxStyle:140,
+trackSuperId:476,
+smallMove:'notMove',  
+trackSId:923
+    });
+</script></div><link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/blog_code-c3a0c33d5c.css">
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.css">
+<script type="text/javascript">
+	// 容错处理
+	var NEWS_FEED = function(){}
+</script>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script type="text/javascript" src="//g.csdnimg.cn/copyright/1.0.3/copyright.js"></script>
+<div style="display:none;">
+	<img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location.href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+</div>
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/chart-3456820cac.css" />
+<script src="https://dup.baidustatic.com/js/ds.js"></script>
+<div class="container clearfix" id="mainBox">
+			<div class="recommend-right">
+  <ul class="recommend-fixed-box">
+    
+  </ul>
+</div>	
+    <main>
+        <div class="blog-content-box">
+	<div class="article-header-box">
+		<div class="article-header">
+			<div class="article-title-box">
+				<span class="article-type type-1 float-left">原</span>				<h1 class="title-article">远程调用——Remoting（C# ）（转）</h1>
+			</div>
+			<div class="article-info-box">
+				<div class="article-bar-top">
+																									<span class="time">2011年08月10日 16:50:00</span>
+					<a class="follow-nickName" href="https://me.csdn.net/evenhbz" target="_blank">evenhbz</a>
+						<span class="read-count">阅读数：89</span>
+										</div>
+				<div class="operating">
+									</div>
+			</div>
+		</div>
+	</div>
+	<article class="baidu_pl">
+		<div id="article_content" class="article_content clearfix csdn-tracking-statistics" data-pid="blog"  data-mod=popu_307  data-dsm = "post" >
+								<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-f57960eb32.css" />
+        								            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-f57960eb32.css" />
+						<div class="htmledit_views" id="content_views">
+                <p><span style="color:#333333;font-family:Arial;font-size:15px;line-height:26px;">
+</span></p>
+<div class="postTitle">.Net对于远程调用提供了两种方法：<strong>Remoting</strong>和<strong>WebService</strong>。</div>
+<p>WebService现在是如火如荼，特别是有一种比较流行的架构：Winform+WebService（Java、.Net），<br />我曾经做过的一个项目就是这样子的，分布式、跨平台、极佳的用户体验，这三者结合起来是不是很诱人？<br />不过，这里我只说Remoting，Remoting具有以下特点：<br /><span style="font-family:Verdana;">1、Tcp通道的Remoting速度非常快<br />2、虽然是远程的，但是非常接近于本地调用对象<br />3、可以做到保持对象的状态<br />4、没有应用程序限制，可以是控制台，winform，iis，windows服务承载远程对象<br />缺点：<br />1、不是标准的应用，因此有平台限制<br />2、脱离iis的话需要有自己的安全机制<br />可以看出来，比起WebService，Remoting更适合于中小型局域网应用，而不适用于企业级的应用。<br />下面给出一个极其简单的Sample：<br />Remoting用的对象：</span></p>
+<div style="font-size:13px;width:680px;background-color:#eeeeee;border:1px solid #cccccc;">
+<span style="font-family:Verdana;"><span style="color:#008080;"> 1</span><img src="http://www.cnblogs.com/Images/OutliningIndicators/None.gif" alt="" align="top" /><span style="color:#0000ff;">namespace</span></span><span style="font-family:Verdana;"><span style="color:#000000;"> RemoteSample<br /></span><span style="color:#008080;"> 2</span><span style="color:#000000;"><img id="Codehighlighter1_23_228_Open_Image" src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedBlockStart.gif" alt="" align="top" /></span></span><span id="Codehighlighter1_23_228_Open_Text"><span style="font-family:Verdana;"><span style="color:#000000;">{<br /></span><span style="color:#008080;"> 3</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />    </span><span style="color:#0000ff;">public</span><span style="color:#000000;"> </span><span style="color:#0000ff;">class</span></span><span style="font-family:Verdana;"><span style="color:#000000;"> RemoteObject : System.MarshalByRefObject<br /></span><span style="color:#008080;"> 4</span><span style="color:#000000;"><img id="Codehighlighter1_81_226_Open_Image" src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif" alt="" align="top" />    </span></span><span id="Codehighlighter1_81_226_Open_Text"><span style="font-family:Verdana;"><span style="color:#000000;">{<br /></span><span style="color:#008080;"> 5</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />        </span><span style="color:#0000ff;">public</span></span><span style="font-family:Verdana;"><span style="color:#000000;"> RemoteObject()<br /></span><span style="color:#008080;"> 6</span><span style="color:#000000;"><img id="Codehighlighter1_109_166_Open_Image" src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif" alt="" align="top" />        </span></span><span id="Codehighlighter1_109_166_Open_Text"><span style="font-family:Verdana;"><span style="color:#000000;">{<br /></span><span style="color:#008080;"> 7</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />            System.Console.WriteLine(</span><span style="color:#000000;">"</span><span style="color:#000000;">New Referance Added!</span><span style="color:#000000;">"</span></span><span style="font-family:Verdana;"><span style="color:#000000;">);<br /></span><span style="color:#008080;"> 8</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif" alt="" align="top" />        }</span></span></span><span style="color:#000000;"><br /></span><span style="color:#008080;"><span style="font-family:Verdana;"> 9</span></span><span style="font-family:Verdana;"><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" /><br /></span><span style="color:#008080;">10</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />        </span><span style="color:#0000ff;">public</span><span style="color:#000000;"> </span><span style="color:#0000ff;">int</span><span style="color:#000000;"> sum(</span><span style="color:#0000ff;">int</span><span style="color:#000000;"> a, </span><span style="color:#0000ff;">int</span></span><span style="font-family:Verdana;"><span style="color:#000000;"> b)<br /></span><span style="color:#008080;">11</span><span style="color:#000000;"><img id="Codehighlighter1_202_223_Open_Image" src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif" alt="" align="top" />        </span></span><span id="Codehighlighter1_202_223_Open_Text"><span style="font-family:Verdana;"><span style="color:#000000;">{<br /></span><span style="color:#008080;">12</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />            </span><span style="color:#0000ff;">return</span><span style="color:#000000;"> a </span><span style="color:#000000;">+</span></span><span style="font-family:Verdana;"><span style="color:#000000;"> b;<br /></span><span style="color:#008080;">13</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif" alt="" align="top" />        }</span></span></span><span style="color:#000000;"><br /></span><span style="font-family:Verdana;"><span style="color:#008080;">14</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif" alt="" align="top" />    }</span></span></span><span style="color:#000000;"><br /></span><span style="font-family:Verdana;"><span style="color:#008080;">15</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedBlockEnd.gif" alt="" align="top" />}</span></span></span>
+</div>
+<p>
+<span style="font-family:Verdana;">将其编译为一个lib文件：csc /t:library RemoteObject.cs</span><br /><br /><span style="font-family:Verdana;">Server端：<br /></span></p>
+<div style="font-size:13px;width:680px;background-color:#eeeeee;border:1px solid #cccccc;">
+<span style="color:#008080;"> 1</span><img src="http://www.cnblogs.com/Images/OutliningIndicators/None.gif" alt="" align="top" /><span style="color:#0000ff;">using</span><span style="color:#000000;"> System;<br /></span><span style="color:#008080;"> 2</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/None.gif" alt="" align="top" /></span><span style="color:#0000ff;">using</span><span style="color:#000000;"> System.Runtime;<br /></span><span style="color:#008080;"> 3</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/None.gif" alt="" align="top" /></span><span style="color:#0000ff;">using</span><span style="color:#000000;"> System.Runtime.Remoting;<br /></span><span style="color:#008080;"> 4</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/None.gif" alt="" align="top" /></span><span style="color:#0000ff;">using</span><span style="color:#000000;"> System.Runtime.Remoting.Channels;<br /></span><span style="color:#008080;"> 5</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/None.gif" alt="" align="top" /></span><span style="color:#0000ff;">using</span><span style="color:#000000;"> System.Runtime.Remoting.Channels.Tcp;<br /></span><span style="color:#008080;"> 6</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/None.gif" alt="" align="top" /></span><span style="color:#0000ff;">using</span><span style="color:#000000;"> RemoteSample;<br /></span><span style="color:#008080;"> 7</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/None.gif" alt="" align="top" /><br /></span><span style="color:#008080;"> 8</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/None.gif" alt="" align="top" /></span><span style="color:#0000ff;">namespace</span><span style="color:#000000;"> RemoteSampleServer<br /></span><span style="color:#008080;"> 9</span><span style="color:#000000;"><img id="Codehighlighter1_201_600_Open_Image" src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedBlockStart.gif" alt="" align="top" /></span><span id="Codehighlighter1_201_600_Open_Text"><span style="color:#000000;">{<br /></span><span style="color:#008080;">10</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />    </span><span style="color:#0000ff;">public</span><span style="color:#000000;"> </span><span style="color:#0000ff;">class</span><span style="color:#000000;"> RemoteServer<br /></span><span style="color:#008080;">11</span><span style="color:#000000;"><img id="Codehighlighter1_231_598_Open_Image" src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif" alt="" align="top" />    </span><span id="Codehighlighter1_231_598_Open_Text"><span style="color:#000000;">{<br /></span><span style="color:#008080;">12</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />        </span><span style="color:#0000ff;">public</span><span style="color:#000000;"> </span><span style="color:#0000ff;">static</span><span style="color:#000000;"> </span><span style="color:#0000ff;">void</span><span style="color:#000000;"> Main(String[] args)<br /></span><span style="color:#008080;">13</span><span style="color:#000000;"><img id="Codehighlighter1_276_595_Open_Image" src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif" alt="" align="top" />        </span><span id="Codehighlighter1_276_595_Open_Text"><span style="color:#000000;">{<br /></span><span style="color:#008080;">14</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />             TcpServerChannel channel </span><span style="color:#000000;">=</span><span style="color:#000000;"> </span><span style="color:#0000ff;">new</span><span style="color:#000000;"> TcpServerChannel(</span><span style="color:#000000;">6666</span><span style="color:#000000;">);<br /></span><span style="color:#008080;">15</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />             ChannelServices.RegisterChannel(channel);<br /></span><span style="color:#008080;">16</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />             RemotingConfiguration.RegisterWellKnownServiceType(</span><span style="color:#0000ff;">typeof</span><span style="color:#000000;">(RemoteObject),<br /></span><span style="color:#008080;">17</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />                 </span><span style="color:#000000;">"</span><span style="color:#000000;">RemoteObject</span><span style="color:#000000;">"</span><span style="color:#000000;">, WellKnownObjectMode.SingleCall);<br /></span><span style="color:#008080;">18</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />             System.Console.WriteLine(</span><span style="color:#000000;">"</span><span style="color:#000000;">Press Any Key</span><span style="color:#000000;">"</span><span style="color:#000000;">);<br /></span><span style="color:#008080;">19</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />             System.Console.ReadLine();<br /></span><span style="color:#008080;">20</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif" alt="" align="top" />         }</span></span><span style="color:#000000;"><br /></span><span style="color:#008080;">21</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif" alt="" align="top" />    }</span></span><span style="color:#000000;"><br /></span><span style="color:#008080;">22</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedBlockEnd.gif" alt="" align="top" />}</span></span>
+</div>
+<p>（其中<span style="font-size:13px;">RemoteObject是Client和Server端都知道的一种自定义类型），</span>将其编译为一个exe文件：<span style="font-family:Verdana;">csc /r:System.Runtime.Remoting.dll /r:RemoteObject.dll RemoteServer.cs</span></p>
+<p><br />Client端：</p>
+<div style="font-size:13px;width:680px;background-color:#eeeeee;border:1px solid #cccccc;">
+<span style="color:#008080;"> 1</span><img src="http://www.cnblogs.com/Images/OutliningIndicators/None.gif" alt="" align="top" /><span style="color:#0000ff;">using</span><span style="color:#000000;"> System;<br /></span><span style="color:#008080;"> 2</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/None.gif" alt="" align="top" /></span><span style="color:#0000ff;">using</span><span style="color:#000000;"> System.Runtime.Remoting;<br /></span><span style="color:#008080;"> 3</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/None.gif" alt="" align="top" /></span><span style="color:#0000ff;">using</span><span style="color:#000000;"> System.Runtime.Remoting.Channels;<br /></span><span style="color:#008080;"> 4</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/None.gif" alt="" align="top" /></span><span style="color:#0000ff;">using</span><span style="color:#000000;"> System.Runtime.Remoting.Channels.Tcp;<br /></span><span style="color:#008080;"> 5</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/None.gif" alt="" align="top" /></span><span style="color:#0000ff;">using</span><span style="color:#000000;"> RemoteSample;<br /></span><span style="color:#008080;"> 6</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/None.gif" alt="" align="top" /><br /></span><span style="color:#008080;"> 7</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/None.gif" alt="" align="top" /></span><span style="color:#0000ff;">namespace</span><span style="color:#000000;"> RemoteSampleClient<br /></span><span style="color:#008080;"> 8</span><span style="color:#000000;"><img id="Codehighlighter1_179_537_Open_Image" src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedBlockStart.gif" alt="" align="top" /></span><span id="Codehighlighter1_179_537_Open_Text"><span style="color:#000000;">{<br /></span><span style="color:#008080;"> 9</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />    </span><span style="color:#0000ff;">public</span><span style="color:#000000;"> </span><span style="color:#0000ff;">class</span><span style="color:#000000;"> RemoteClient<br /></span><span style="color:#008080;">10</span><span style="color:#000000;"><img id="Codehighlighter1_209_535_Open_Image" src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif" alt="" align="top" />    </span><span id="Codehighlighter1_209_535_Open_Text"><span style="color:#000000;">{<br /></span><span style="color:#008080;">11</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />        </span><span style="color:#0000ff;">public</span><span style="color:#000000;"> </span><span style="color:#0000ff;">static</span><span style="color:#000000;"> </span><span style="color:#0000ff;">void</span><span style="color:#000000;"> Main(</span><span style="color:#0000ff;">string</span><span style="color:#000000;">[] args)<br /></span><span style="color:#008080;">12</span><span style="color:#000000;"><img id="Codehighlighter1_254_532_Open_Image" src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif" alt="" align="top" />        </span><span id="Codehighlighter1_254_532_Open_Text"><span style="color:#000000;">{<br /></span><span style="color:#008080;">13</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />            ChannelServices.RegisterChannel(</span><span style="color:#0000ff;">new</span><span style="color:#000000;"> TcpClientChannel());<br /></span><span style="color:#008080;">14</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />            RemoteObject remoteobj </span><span style="color:#000000;">=</span><span style="color:#000000;"> (RemoteObject)Activator.GetObject(</span><span style="color:#0000ff;">typeof</span><span style="color:#000000;">(RemoteObject),<br /></span><span style="color:#008080;">15</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />            </span><span style="color:#000000;">"</span><span style="color:#000000;">tcp://localhost:6666/RemoteObject</span><span style="color:#000000;">"</span><span style="color:#000000;">);<br /></span><span style="color:#008080;">16</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />            Console.WriteLine(</span><span style="color:#000000;">"</span><span style="color:#000000;">1 + 2 = </span><span style="color:#000000;">"</span><span style="color:#000000;"> </span><span style="color:#000000;">+</span><span style="color:#000000;"> remoteobj.sum(</span><span style="color:#000000;">1</span><span style="color:#000000;">,</span><span style="color:#000000;">2</span><span style="color:#000000;">).ToString());<br /></span><span style="color:#008080;">17</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif" alt="" align="top" />            Console.ReadLine();<br /></span><span style="color:#008080;">18</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif" alt="" align="top" />        }</span></span><span style="color:#000000;"><br /></span><span style="color:#008080;">19</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif" alt="" align="top" />    }</span></span><span style="color:#000000;"><br /></span><span style="color:#008080;">20</span><span style="color:#000000;"><img src="http://www.cnblogs.com/Images/OutliningIndicators/ExpandedBlockEnd.gif" alt="" align="top" />}</span></span>
+</div>
+<p>同样的，将其编译为exe文件：<span style="font-family:Verdana;">csc /r:System.Runtime.Remoting.dll /r:RemoteObject.dll RemoteClient.cs</span><br /><br />好了，一次运行生成的<span style="font-family:Verdana;">RemoteServer.exe和<span style="font-family:Verdana;">RemoteClient.exe</span>，你就会发现原来Remoting是这样简单。</span></p>
+<p> </p>
+<p> </p>            </div>
+                      </div>
+	</article>
+</div>
+
+  <div class="hide-article-box hide-article-pos text-center">
+    <div class="border"></div>
+        <a class="btn article-footer-btn" id="btn-readmore" data-track-view='{"mod":"popu_376","con":",https://blog.csdn.net/evenhbz/article/details/83984149,"}' data-track-click='{"mod":"popu_376","con":",https://blog.csdn.net/evenhbz/article/details/83984149,"}'>阅读更多</a>
+        <a class="btn article-footer-btn article-footer-bookmark-btn" >
+      <svg class="icon no-active hover-hide" aria-hidden="true">
+        <use xlink:href="#csdnc-bookmark"></use>
+      </svg>
+      <span>收藏</span>
+    </a>
+    <div class="btn article-footer-btn  bds_weixin article-footer-share-btn" data-cmd="weixin" title="分享">
+      <svg class="icon no-active hover-hide" aria-hidden="true">
+        <use xlink:href="#csdnc-share"></use>
+      </svg>
+      <span>分享</span>
+      <div class="bdsharebuttonbox">
+        <a href="#"class="bds_weixin clear-share-style-article-footer" data-cmd="weixin" title="分享"></a>
+      </div>
+    </div>
+
+  </div>
+  
+  <script>
+  (function(){
+    function collection(){
+      if (currentUserName) {
+        var markObj = {};
+            markObj.imgUrl ='https://csdnimg.cn/release/phoenix/static_blog/images/appqr.png';
+        var markPrompt = (new window.csdn.publicPrompt).init(markObj);
+        var maeked = '您已经收藏过';
+        if (!$(this).hasClass("liked")) {
+          $.ajax({
+            url: 'https://my.csdn.net/my/favorite/do_add/2',
+            dataType: 'json',
+            type: 'POST',
+            xhrFields: {
+              withCredentials: true
+            },
+            data: {
+              title: articleTit,
+              url: 'https://blog.csdn.net/evenhbz/article/details/83984149',
+              share: 1,
+              map_name: ''
+            },
+            success: function(data) {
+              
+              if (data.succ == 1) {
+                $('.btn-bookmark').addClass("liked");
+                $('.article-footer-bookmark-btn').addClass("liked").children('span').text('已收藏');
+                markPrompt.show({})
+                // alert('收藏成功,可以在个人中心查看我的收藏');
+              } else {
+                if (data.msg === "您已经收藏过") {
+                  $('.btn-bookmark').addClass("liked");
+                  $('.article-footer-bookmark-btn').addClass("liked").children('span').text('已收藏');
+                  markPrompt.show({
+                    titleStr: maeked
+                  })
+                }else{
+                  alert(data.msg);
+                  
+                }
+              }
+            }
+          });
+        } else {
+          markPrompt.show({
+            titleStr: maeked
+          })
+        }
+      } else {
+        window.csdn.loginBox.show();
+      }
+    }
+    function permissionCheck(dom){
+      var returnData = false;
+      switch (true) {
+        case currentUserPermission && userPermission:
+          clearReadMoreBtn(dom)
+          returnData = true;
+          break;
+        case userPermission:
+          dom.text('VIP阅读');
+          returnData = false;
+          break;
+        default:
+          
+      }
+      return returnData;
+    }
+    window.csdn = window.csdn ? window.csdn : {};
+    window.csdn.articleCollection = collection;
+    function clearReadMoreBtn(dom) {
+      if(userPermission && !(dom instanceof jQuery)) {
+        window.open('https://mall.csdn.net/vip?utm_source=brv')
+        return false;
+      }
+      dom = dom instanceof jQuery ? dom : $(this);
+      $("div.article_content").removeAttr("style");
+      dom.parent().remove();
+    }
+    function setArticleH(btnReadmore,posi){
+      var winH = $(window).height();
+      var articleBox = $("div.article_content");
+      var artH = articleBox.height();
+      if(artH > winH*posi){
+        articleBox.css({
+          'height':winH*posi+'px',
+          'overflow':'hidden'
+        })
+        btnReadmore.click(clearReadMoreBtn)
+      }else{
+        btnReadmore.parent().remove()
+      }
+    }
+    var btnReadmore = $("#btn-readmore");
+    $('.article-footer-bookmark-btn').click(window.csdn.articleCollection)
+    if(btnReadmore.length>0){
+      if (permissionCheck(btnReadmore)) {
+        return false;
+      }
+      if(currentUserName){
+        setArticleH(btnReadmore,3);
+      }else{
+        setArticleH(btnReadmore,0.5);
+      }
+    }else{
+      $('.hide-article-box').addClass('hide-article-style');
+    }
+  })()
+</script>
+<script>
+		$(".MathJax").remove();
+		if($('div.markdown_views pre.prettyprint code.hljs').length > 0 ){
+				$('div.markdown_views')[0].className = 'markdown_views';
+		}
+</script>
+        <div id="dmp_ad_58"><div id="kp_box_58" data-pid="58" data-track-view='{"mod":"kp_popu_58-386","con":",,"}' data-track-click='{"mod":"kp_popu_58-386","con":",,"}'><div style="100%;">
+<script type="text/javascript" src="//rabc1.iteye.com/production/resource/web/6xwm4l.js?lg=ydmpioh"></script>
+</div></div></div>        <a id="commentBox"></a>
+<div class="comment-box">
+	
+	<div class="comment-edit-box d-flex">
+		<a id="commentsedit"></a>
+		<div class="user-img">
+			<a href="//me.csdn.net/jinwenmao" target="_blank">
+				<img class="" src="https://avatar.csdn.net/6/2/E/3_jinwenmao.jpg">
+			</a>
+		</div>
+		<form id="commentform">
+			<input type="hidden" id="comment_replyId">
+			<textarea class="comment-content" name="comment_content" id="comment_content" placeholder="想对作者说点什么"></textarea>
+			<div class="opt-box"> <!-- d-flex -->
+				<div id="ubbtools" class="add_code">
+					<a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+				</div>
+				<input type="hidden" id="comment_replyId" name="comment_replyId">
+				<input type="hidden" id="article_id" name="article_id" value="83984149">
+				<input type="hidden" id="comment_userId" name="comment_userId" value="">
+				<input type="hidden" id="commentId" name="commentId" value="">
+				<div style="display: none;" class="csdn-tracking-statistics tracking-click" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+				<div class="dropdown" id="myDrap">
+					<a class="dropdown-face d-flex align-items-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<div class="txt-selected text-truncate">添加代码片</div>
+					<svg class="icon d-block" aria-hidden="true">
+						<use xlink:href="#csdnc-triangledown"></use>
+					</svg>
+					</a>
+					<ul class="dropdown-menu" id="commentCode" aria-labelledby="drop4">
+						<li><a data-code="html">HTML/XML</a></li>
+						<li><a data-code="objc">objective-c</a></li>
+						<li><a data-code="ruby">Ruby</a></li>
+						<li><a data-code="php">PHP</a></li>
+						<li><a data-code="csharp">C</a></li>
+						<li><a data-code="cpp">C++</a></li>
+						<li><a data-code="javascript">JavaScript</a></li>
+						<li><a data-code="python">Python</a></li>
+						<li><a data-code="java">Java</a></li>
+						<li><a data-code="css">CSS</a></li>
+						<li><a data-code="sql">SQL</a></li>
+						<li><a data-code="plain">其它</a></li>
+					</ul>
+				</div>  
+				<div class="right-box">
+					<span id="tip_comment" class="tip">还能输入<em>1000</em>个字符</span>
+					<input type="submit" class="btn btn-sm btn-red btn-comment" value="发表评论">
+				</div>
+			</div>
+		</form>
+	</div>
+
+		<div class="comment-list-container">
+		<a id="comments"></a>
+		<div class="comment-list-box">
+		</div>
+		<div id="commentPage" class="pagination-box d-none"></div>
+		<div class="opt-box text-center">
+			<div class="btn btn-sm btn-link-blue" id="btnMoreComment"></div>
+		</div>
+	</div>
+</div>
+        <div class="recommend-box">
+            		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/u011555996/article/details/52933116,BlogCommendFromThirdService_0"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/u011555996/article/details/52933116,BlogCommendFromThirdService_0"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u011555996/article/details/52933116" target="_blank" title="C# Remoting 简单实现">
+				<h4 class="text-truncate oneline">
+						<em>C#</em> <em>Remoting</em> 简单实现				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">10-26</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2382</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u011555996/article/details/52933116" target="_blank" title="C# Remoting 简单实现">
+							<span class="desc oneline">今天对C#Remoting进行了初步的学习，废话不说...RemotingModel:Talker.csusingSystem;usingSystem.Collections.Generic;usin...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u011555996">来自：	<span class="blog_title"> u011555996的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/sinat_26917383/article/details/51056068,BlogCommendFromThirdService_1"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/sinat_26917383/article/details/51056068,BlogCommendFromThirdService_1"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/sinat_26917383/article/details/51056068" target="_blank" title="R语言︱文本挖掘之中文分词包——Rwordseg包(原理、功能、详解)">
+				<h4 class="text-truncate oneline">
+						R语言︱文本挖掘之中文分词包——Rwordseg包(原理、功能、详解)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">04-04</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							3万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/sinat_26917383/article/details/51056068" target="_blank" title="R语言︱文本挖掘之中文分词包——Rwordseg包(原理、功能、详解)">
+							<span class="desc oneline">笔者寄语：与前面的RsowballC分词不同的地方在于这是一个中文的分词包，简单易懂，分词是一个非常重要的步骤，可以通过一些字典，进行特定分词。大致分析步骤如下：数据导入——选择分词字典——分词但是下...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/sinat_26917383">来自：	<span class="blog_title"> 素质云笔记/Recorder...</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/yehui_qy/article/details/53787386,BlogCommendFromThirdService_2"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/yehui_qy/article/details/53787386,BlogCommendFromThirdService_2"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/yehui_qy/article/details/53787386" target="_blank" title="机器学习-数据归一化">
+				<h4 class="text-truncate oneline">
+						机器学习-数据归一化				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">12-21</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							7953</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/yehui_qy/article/details/53787386" target="_blank" title="机器学习-数据归一化">
+							<span class="desc oneline">定义数据标准化（归一化）处理是数据挖掘的一项基础工作，不同评价指标往往具有不同的量纲和量纲单位，这样的情况会影响到数据分析的结果，为了消除指标之间的量纲影响，需要进行数据标准化处理，以解决数据指标之间...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/yehui_qy">来自：	<span class="blog_title"> yehui_qy的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_59" data-pid="59" data-track-view='{"mod":"kp_popu_59-78","con":",,"}' data-track-click='{"mod":"kp_popu_59-78","con":",,"}'><script type="text/javascript">
+    (function() {
+        var s = "_" + Math.random().toString(36).slice(2);
+        document.write('<div style="" id="' + s + '"></div>');
+        (window.slotbydup = window.slotbydup || []).push({
+            id: "u3491668",
+            container:  s
+        });
+    })();
+</script>
+<!-- 多条广告如下脚本只需引入一次 -->
+<script type="text/javascript" src="//cpro.baidustatic.com/cpro/ui/c.js" async="async" defer="defer" ></script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/maoyuanming0806/article/details/78067446,BlogCommendFromThirdService_3"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/maoyuanming0806/article/details/78067446,BlogCommendFromThirdService_3"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/maoyuanming0806/article/details/78067446" target="_blank" title="搭建图片服务器《二》-linux安装nginx">
+				<h4 class="text-truncate oneline">
+						搭建图片服务器《二》-linux安装nginx				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-22</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							5万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/maoyuanming0806/article/details/78067446" target="_blank" title="搭建图片服务器《二》-linux安装nginx">
+							<span class="desc oneline">nginx是个好东西，Nginx(enginex)是一个高性能的HTTP和反向代理服务器，也是一个IMAP/POP3/SMTP服务器。Nginx是由伊戈尔·赛索耶夫为俄罗斯访问量第二的Rambler....</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/maoyuanming0806">来自：	<span class="blog_title"> maoyuanming0806的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/wuchengzeng/article/details/50037611,BlogCommendFromThirdService_4"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/wuchengzeng/article/details/50037611,BlogCommendFromThirdService_4"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wuchengzeng/article/details/50037611" target="_blank" title="jquery/js实现一个网页同时调用多个倒计时(最新的)">
+				<h4 class="text-truncate oneline">
+						jquery/js实现一个网页同时调用多个倒计时(最新的)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-25</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							48万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wuchengzeng/article/details/50037611" target="_blank" title="jquery/js实现一个网页同时调用多个倒计时(最新的)">
+							<span class="desc oneline">jquery/js实现一个网页同时调用多个倒计时(最新的)最近需要网页添加多个倒计时.查阅网络,基本上都是千遍一律的不好用.自己按需写了个.希望对大家有用.有用请赞一个哦!//js//js2varpl...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/wuchengzeng">来自：	<span class="blog_title"> Websites</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident recommend-other-item-box" data-track-view='{"mod":"popu_387","con":",https://bbs.csdn.net/topics/392566087,BlogCommendFromBaidu_5"}' data-track-click='{"mod":"popu_387","con":",https://bbs.csdn.net/topics/392566087,BlogCommendFromBaidu_5"}'>
+		<a href="https://bbs.csdn.net/topics/392566087" target="_blank">
+			<h4 class="text-truncate oneline">
+					<em>c#</em> 远程绑定事件			</h4>
+			<div class="info-box d-flex align-content-center">
+					<span class="date">04-13</span>
+			</div>
+			<p class="content oneline">
+        <span class="desc oneline">公司原有的RPC框架是只能客户端去拉服务器的数据，但是现在有需求就是要服务器发送事件推送给客户端， 比如业务逻辑中有这么个类 public class Door { public event Even</span>
+                  <span class="type-show type-show-bbs">论坛</span>
+        			</p>
+		</a>
+
+	</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident recommend-other-item-box" data-track-view='{"mod":"popu_387","con":",http://ask.csdn.net/questions/347691,BlogCommendFromBaidu_6"}' data-track-click='{"mod":"popu_387","con":",http://ask.csdn.net/questions/347691,BlogCommendFromBaidu_6"}'>
+		<a href="http://ask.csdn.net/questions/347691" target="_blank">
+			<h4 class="text-truncate oneline">
+					<em>C#</em>如何<em>远程调用</em>com+..			</h4>
+			<div class="info-box d-flex align-content-center">
+					<span class="date">11-24</span>
+			</div>
+			<p class="content oneline">
+        <span class="desc oneline">-</span>
+                  <span class="type-show type-show-ask">问答</span>
+        			</p>
+		</a>
+
+	</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/yal179/article/details/37669701,BlogCommendFromBaidu_7"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/yal179/article/details/37669701,BlogCommendFromBaidu_7"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/yal179/article/details/37669701" target="_blank" title="vs2010 c#调用mstscax.dll实现远程桌面连接">
+				<h4 class="text-truncate oneline">
+						vs2010 <em>c#</em>调用mstscax.dll实现远程桌面连接				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">07-10</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4784</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/yal179/article/details/37669701" target="_blank" title="vs2010 c#调用mstscax.dll实现远程桌面连接">
+							<span class="desc oneline">1.项目“引用”中选择“添加引用”</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/yal179">来自：	<span class="blog_title"> yal179的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_60" data-pid="60" data-track-view='{"mod":"kp_popu_60-894","con":"1757295831423192743,https://edu.csdn.net/course/detail/7785,"}' data-track-click='{"mod":"kp_popu_60-894","con":"1757295831423192743,https://edu.csdn.net/course/detail/7785,"}'><link rel="stylesheet" href="https://www.csdn.net/company/css/edu-recommend-1.0.1.css">
+  <div class="edu-ad-list">
+    <div class="recommend-item-box type_blog clearfix">
+      <div class="content">
+        <a href="https://edu.csdn.net/course/detail/7785?utm_source=baidutj" target="_blank" title="基于.net平台remoting、DB2技术的大型分布式HIS系统架构及开发">
+          <h4 class="text-truncate oneline">基于.net平台remoting、DB2技术的大型分布式HIS系统架构及开发</h4>
+        </a>
+        <p class="content">
+          <a href="https://edu.csdn.net/course/detail/7785?utm_source=baidutj" target="_blank" title="基于.net平台remoting、DB2技术的大型分布式HIS系统架构及开发">
+            <span class="desc oneline">本次课程涉及到系统架构、DB2、抽象工厂、组件式编程、基于角色和个人的混合授权思想、动态菜单技术、报表打印、作业调度、remoting技术、分布式负载均衡等。n课程假设读者就是刚入职的员工，讲师承担师傅的角色，为各位呈现实际开发的流程、习惯和应该具备的技能。</span>
+          </a>
+          <span class="blog_title_box oneline ">
+            <span class="type-show type-show-edu type-show-after">学院</span>
+            讲师： <span class="blog_title"> 石曼迪</span>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/kissqw/article/details/18605655,BlogCommendFromBaidu_8"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/kissqw/article/details/18605655,BlogCommendFromBaidu_8"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/kissqw/article/details/18605655" target="_blank" title=".NET Remoting 最简单示例">
+				<h4 class="text-truncate oneline">
+						.NET <em>Remoting</em> 最简单示例				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">01-21</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/kissqw/article/details/18605655" target="_blank" title=".NET Remoting 最简单示例">
+							<span class="desc oneline">学习技术知识一个好的方法是先动手，再深入，给出一个最简单的Remoting程序示例（C#）如下：Step1:创建类库（DLL）工程RemotingObjects，类Person代码如下：usingSy...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/kissqw">来自：	<span class="blog_title"> 李燕军的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    			<div class="recommend-item-box recommend-box-ident recommend-download-box clearfix" data-track-view='{"mod":"popu_387","con":",https://download.csdn.net/download/jato333/1027063,BlogCommendFromBaidu_9"}' data-track-click='{"mod":"popu_387","con":",https://download.csdn.net/download/jato333/1027063,BlogCommendFromBaidu_9"}'>
+			<a href="https://download.csdn.net/download/jato333/1027063" target="_blank">
+				<div class="content clearfix">
+					<div class="">
+						<h4 class="text-truncate oneline clearfix">
+							<em>C#</em> <em>Remoting</em>框架实例，采用了三层架构，并附加了客户端调用<em>Remoting</em>的代码						</h4>
+						<span class="data float-right">02-20</span>
+					</div>
+					<div class="desc oneline">
+							C# Remoting框架实例，采用了三层架构，并附加了客户端调用Remoting的代码；这样架构得代码思路清晰，维护起来比较容易，个人觉得这种框架比较成熟，共享给大家研究一下。					</div>
+          <span class="type-show type-show-download">下载</span>
+				</div>
+			</a>
+		</div>
+	
+    
+          <div class="recommend-item-box blog-expert-recommend-box">
+				<div class="d-flex">
+					<div class="blog-expert-recommend">
+						<div class="blog-expert">
+							<div class="blog-expert-flexbox"></div>
+						</div>
+					</div>
+				</div>
+      </div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/flyinghearts/article/details/5898183,BlogCommendFromThirdService_10"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/flyinghearts/article/details/5898183,BlogCommendFromThirdService_10"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/flyinghearts/article/details/5898183" target="_blank" title="多重背包O(N*V)算法详解（使用单调队列） ">
+				<h4 class="text-truncate oneline">
+						多重背包O(N*V)算法详解（使用单调队列） 				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-20</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/flyinghearts/article/details/5898183" target="_blank" title="多重背包O(N*V)算法详解（使用单调队列） ">
+							<span class="desc oneline">多重背包问题：有N种物品和容量为V的背包，若第i种物品，容量为v[i]，价值为w[i]，共有n[i]件。怎样装才能使背包内的物品总价值最大？网上关于“多重背包”的资料倒是不少，但是关于怎么实现O(N*...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/flyinghearts">来自：	<span class="blog_title"> flyinghearts的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/VBcom/article/details/7245186,BlogCommendFromThirdService_11"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/VBcom/article/details/7245186,BlogCommendFromThirdService_11"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/VBcom/article/details/7245186" target="_blank" title="DirectX修复工具增强版">
+				<h4 class="text-truncate oneline">
+						DirectX修复工具增强版				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">02-09</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							198万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/VBcom/article/details/7245186" target="_blank" title="DirectX修复工具增强版">
+							<span class="desc oneline">最后更新：2018-12-20DirectX修复工具最新版：DirectXRepairV3.8增强版NEW!版本号：V3.8.0.11638大小:107MB/7z格式压缩，189MB/zip格式压缩，...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/VBcom">来自：	<span class="blog_title"> VBcom的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/ch_liu23/article/details/53558549,BlogCommendFromThirdService_12"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/ch_liu23/article/details/53558549,BlogCommendFromThirdService_12"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ch_liu23/article/details/53558549" target="_blank" title="YOLOv2训练自己的数据集（VOC格式）">
+				<h4 class="text-truncate oneline">
+						YOLOv2训练自己的数据集（VOC格式）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">12-10</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ch_liu23/article/details/53558549" target="_blank" title="YOLOv2训练自己的数据集（VOC格式）">
+							<span class="desc oneline">最近在用yolo来做视频中的人员检测，选择YOLO是从速度考虑，在训练数据集的过程中碰到很多坑，并且现在yolo又到了v2的版本，在网络和命令中都有区别...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/ch_liu23">来自：	<span class="blog_title"> ch_liu23的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_61" data-pid="61" data-track-view='{"mod":"kp_popu_61-809","con":",,"}' data-track-click='{"mod":"kp_popu_61-809","con":",,"}'><script
+    async="async"
+    charset="utf-8"
+    src="https://shared.ydstatic.com/js/yatdk/3.0.1/stream.js"
+    data-id="6cb24153a03289ff3597c7aab4b69fe9"
+    data-div-Style="width:100%;"
+data-tit-Style="margin-bottom: 6px; font-size: 18px; line-height: 24px; color: #3d3d3d;display: inline-block;font-weight:bold;"
+data-des-Style="font-size: 13px; line-height: 22px; white-space: normal; color: #999;"
+data-img-Style="float:left;margin-right:15px;width:90px;height:60px;">
+</script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/u010785685/article/details/52366977,BlogCommendFromThirdService_13"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/u010785685/article/details/52366977,BlogCommendFromThirdService_13"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u010785685/article/details/52366977" target="_blank" title="redis两种持久化策略">
+				<h4 class="text-truncate oneline">
+						redis两种持久化策略				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-30</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							3万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u010785685/article/details/52366977" target="_blank" title="redis两种持久化策略">
+							<span class="desc oneline">reids是一个key-value存储系统，为了保证效率，缓存在内存中，但是redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件，以保证数据的持久化。 所以：redis是一个支持持...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u010785685">来自：	<span class="blog_title"> 那么好,</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/xinzhangyanxiang/article/details/37317863,BlogCommendFromThirdService_14"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/xinzhangyanxiang/article/details/37317863,BlogCommendFromThirdService_14"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/xinzhangyanxiang/article/details/37317863" target="_blank" title="图像物体检测识别中的LBP特征">
+				<h4 class="text-truncate oneline">
+						图像物体检测识别中的LBP特征				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">07-06</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/xinzhangyanxiang/article/details/37317863" target="_blank" title="图像物体检测识别中的LBP特征">
+							<span class="desc oneline">1996年，Ojala老大爷搞出了LBP特征，也即参考文献1。当时好像并未引发什么波澜。到了2002年的时候，老大爷又对LBP的特性进行了总结，产生了参考文献2，这篇文献目前为止引用数目4600+，足...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/xinzhangyanxiang">来自：	<span class="blog_title"> 雨石</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/lidandan2016/article/details/78672899,BlogCommendFromBaidu_15"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/lidandan2016/article/details/78672899,BlogCommendFromBaidu_15"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/lidandan2016/article/details/78672899" target="_blank" title="c# remoting调试方法">
+				<h4 class="text-truncate oneline">
+						<em>c#</em> <em>remoting</em>调试方法				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-30</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2052</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/lidandan2016/article/details/78672899" target="_blank" title="c# remoting调试方法">
+							<span class="desc oneline">如果在服务器端注册远程对象，则需要在服务器端的app.config中添加如下信息：                         在客户端的app.config中添加如下信息：    如若在同一台电...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/lidandan2016">来自：	<span class="blog_title"> 匆匆那年</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/laotse/article/details/7603698,BlogCommendFromBaidu_16"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/laotse/article/details/7603698,BlogCommendFromBaidu_16"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/laotse/article/details/7603698" target="_blank" title="在忍无可忍的情况下，我终于抛弃了remoting">
+				<h4 class="text-truncate oneline">
+						在忍无可忍的情况下，我终于抛弃了<em>remoting</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-26</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							6734</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/laotse/article/details/7603698" target="_blank" title="在忍无可忍的情况下，我终于抛弃了remoting">
+							<span class="desc oneline">remoting最讨厌的就是有个绑定ip问题，如果绑定ip，那么只能绑定一个，那么如果机器是多网卡，则只能用绑定的这个ip访问。这位说了可以绑定机器名啊。绑定机器名的话，如果服务器是内网的就不行了。 ...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/laotse">来自：	<span class="blog_title"> laotse的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident recommend-other-item-box" data-track-view='{"mod":"popu_387","con":",https://bbs.csdn.net/topics/390549501,BlogCommendFromBaidu_17"}' data-track-click='{"mod":"popu_387","con":",https://bbs.csdn.net/topics/390549501,BlogCommendFromBaidu_17"}'>
+		<a href="https://bbs.csdn.net/topics/390549501" target="_blank">
+			<h4 class="text-truncate oneline">
+					<em>C#</em> <em>remoting</em> 实现进程间通信			</h4>
+			<div class="info-box d-flex align-content-center">
+					<span class="date">08-15</span>
+			</div>
+			<p class="content oneline">
+        <span class="desc oneline">RT，请问如何使用C# remoting实现进程间通信功能，就像socket一样的功能？ 我在网上看了几篇介绍remoting功能的文章，但是我实在没有看出来哪里有通信的功能。 路过的，专程的，在下恭</span>
+                  <span class="type-show type-show-bbs">论坛</span>
+        			</p>
+		</a>
+
+	</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_62" data-pid="62" data-track-view='{"mod":"kp_popu_62-809","con":",,"}' data-track-click='{"mod":"kp_popu_62-809","con":",,"}'><script
+    async="async"
+    charset="utf-8"
+    src="https://shared.ydstatic.com/js/yatdk/3.0.1/stream.js"
+    data-id="6cb24153a03289ff3597c7aab4b69fe9"
+    data-div-Style="width:100%;"
+data-tit-Style="margin-bottom: 6px; font-size: 18px; line-height: 24px; color: #3d3d3d;display: inline-block;font-weight:bold;"
+data-des-Style="font-size: 13px; line-height: 22px; white-space: normal; color: #999;"
+data-img-Style="float:left;margin-right:15px;width:90px;height:60px;">
+</script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/changtianshuiyue/article/details/8871597,BlogCommendFromBaidu_18"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/changtianshuiyue/article/details/8871597,BlogCommendFromBaidu_18"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/changtianshuiyue/article/details/8871597" target="_blank" title="C# Remoting">
+				<h4 class="text-truncate oneline">
+						<em>C#</em> <em>Remoting</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">05-01</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							6472</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/changtianshuiyue/article/details/8871597" target="_blank" title="C# Remoting">
+							<span class="desc oneline">涉及到的类：客户端：1.System.Runtime.Remoting.Channel.Tcp.TcpClientChannel类:为远程调用实现使用TCP协议传输消息的客户端信道。信道跨越远程处理边...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/changtianshuiyue">来自：	<span class="blog_title"> changtianshuiyue的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident recommend-other-item-box" data-track-view='{"mod":"popu_387","con":",https://bbs.csdn.net/topics/390704546,BlogCommendFromBaidu_19"}' data-track-click='{"mod":"popu_387","con":",https://bbs.csdn.net/topics/390704546,BlogCommendFromBaidu_19"}'>
+		<a href="https://bbs.csdn.net/topics/390704546" target="_blank">
+			<h4 class="text-truncate oneline">
+					<em>C#</em> <em>Remoting</em> 性能测试工具			</h4>
+			<div class="info-box d-flex align-content-center">
+					<span class="date">02-08</span>
+			</div>
+			<p class="content oneline">
+        <span class="desc oneline">针对C#分布式系统Remoting，如何测试系统服务端与客户端通信的性能？ 可以使用什么工具？</span>
+                  <span class="type-show type-show-bbs">论坛</span>
+        			</p>
+		</a>
+
+	</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/gefangshuai/article/details/50328451,BlogCommendFromThirdService_20"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/gefangshuai/article/details/50328451,BlogCommendFromThirdService_20"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/gefangshuai/article/details/50328451" target="_blank" title="关于SpringBoot bean无法注入的问题（与文件包位置有关）">
+				<h4 class="text-truncate oneline">
+						关于SpringBoot bean无法注入的问题（与文件包位置有关）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">12-16</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							20万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/gefangshuai/article/details/50328451" target="_blank" title="关于SpringBoot bean无法注入的问题（与文件包位置有关）">
+							<span class="desc oneline">问题场景描述整个项目通过Maven构建，大致结构如下：核心Spring框架一个modulespring-boot-baseservice和dao一个moduleserver-core提供系统后台数据管...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/gefangshuai">来自：	<span class="blog_title"> 开发随笔</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/qq574857122/article/details/16361033,BlogCommendFromThirdService_21"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq574857122/article/details/16361033,BlogCommendFromThirdService_21"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq574857122/article/details/16361033" target="_blank" title="强连通分量及缩点tarjan算法解析">
+				<h4 class="text-truncate oneline">
+						强连通分量及缩点tarjan算法解析				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-16</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							61万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq574857122/article/details/16361033" target="_blank" title="强连通分量及缩点tarjan算法解析">
+							<span class="desc oneline">强连通分量：简言之就是找环（每条边只走一次，两两可达）孤立的一个点也是一个连通分量 使用tarjan算法在嵌套的多个环中优先得到最大环(最小环就是每个孤立点） 定义：intTime,DFN[N],Lo...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/qq574857122">来自：	<span class="blog_title"> 九野的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/wwj_748/article/details/30072379,BlogCommendFromThirdService_22"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/wwj_748/article/details/30072379,BlogCommendFromThirdService_22"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wwj_748/article/details/30072379" target="_blank" title="Cocos2d-x 2.2.3 使用NDK配置编译环境">
+				<h4 class="text-truncate oneline">
+						Cocos2d-x 2.2.3 使用NDK配置编译环境				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-11</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wwj_748/article/details/30072379" target="_blank" title="Cocos2d-x 2.2.3 使用NDK配置编译环境">
+							<span class="desc oneline">Cocos2d-x2.2.3使用NDK配置编译环境2014年6月11日 Cocos2d-x3.0以下的开发环境的配置恐怕折磨了很多人，使用cygwin配置编译环境足够让初学者蛋疼一阵子了。本篇博客就是...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/wwj_748">来自：	<span class="blog_title"> 巫山老妖</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_63" data-pid="63" data-track-view='{"mod":"kp_popu_63-809","con":",,"}' data-track-click='{"mod":"kp_popu_63-809","con":",,"}'><script
+    async="async"
+    charset="utf-8"
+    src="https://shared.ydstatic.com/js/yatdk/3.0.1/stream.js"
+    data-id="6cb24153a03289ff3597c7aab4b69fe9"
+    data-div-Style="width:100%;"
+data-tit-Style="margin-bottom: 6px; font-size: 18px; line-height: 24px; color: #3d3d3d;display: inline-block;font-weight:bold;"
+data-des-Style="font-size: 13px; line-height: 22px; white-space: normal; color: #999;"
+data-img-Style="float:left;margin-right:15px;width:90px;height:60px;">
+</script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/u010839382/article/details/48229579,BlogCommendFromThirdService_23"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/u010839382/article/details/48229579,BlogCommendFromThirdService_23"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u010839382/article/details/48229579" target="_blank" title="非局部均值去噪（NL-means）">
+				<h4 class="text-truncate oneline">
+						非局部均值去噪（NL-means）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-06</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u010839382/article/details/48229579" target="_blank" title="非局部均值去噪（NL-means）">
+							<span class="desc oneline">非局部均值（NL-means）是近年来提出的一项新型的去噪技术。该方法充分利用了图像中的冗余信息，在去噪的同时能最大程度地保持图像的细节特征。基本思想是：当前像素的估计值由图像中与它具有相似邻域结构的...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/u010839382">来自：	<span class="blog_title"> xiaoluo91的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/jinping_shi/article/details/59613054,BlogCommendFromThirdService_24"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/jinping_shi/article/details/59613054,BlogCommendFromThirdService_24"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/jinping_shi/article/details/59613054" target="_blank" title="高斯混合模型（GMM）及其EM算法的理解">
+				<h4 class="text-truncate oneline">
+						高斯混合模型（GMM）及其EM算法的理解				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-02</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							11万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/jinping_shi/article/details/59613054" target="_blank" title="高斯混合模型（GMM）及其EM算法的理解">
+							<span class="desc oneline">一个例子高斯混合模型（GaussianMixedModel）指的是多个高斯分布函数的线性组合，理论上GMM可以拟合出任意类型的分布，通常用于解决同一集合下的数据包含多个不同的分布的情况（或者是同一类分...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/jinping_shi">来自：	<span class="blog_title"> 小平子的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident recommend-other-item-box" data-track-view='{"mod":"popu_387","con":",http://ask.csdn.net/questions/248571,BlogCommendFromBaidu_25"}' data-track-click='{"mod":"popu_387","con":",http://ask.csdn.net/questions/248571,BlogCommendFromBaidu_25"}'>
+		<a href="http://ask.csdn.net/questions/248571" target="_blank">
+			<h4 class="text-truncate oneline">
+					<em>C#</em>  <em>remoting</em> 实现多账套 			</h4>
+			<div class="info-box d-flex align-content-center">
+					<span class="date">04-09</span>
+			</div>
+			<p class="content oneline">
+        <span class="desc oneline">-</span>
+                  <span class="type-show type-show-ask">问答</span>
+        			</p>
+		</a>
+
+	</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/kkkkkxiaofei/article/details/9169433,BlogCommendFromBaidu_26"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/kkkkkxiaofei/article/details/9169433,BlogCommendFromBaidu_26"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/kkkkkxiaofei/article/details/9169433" target="_blank" title="初探Remoting双向通信（三）">
+				<h4 class="text-truncate oneline">
+						初探<em>Remoting</em>双向通信（三）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-25</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4638</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/kkkkkxiaofei/article/details/9169433" target="_blank" title="初探Remoting双向通信（三）">
+							<span class="desc oneline">三、利用事件实现服务器向客户端通信   按照之前的思路，这次利用Marshal得到的对象，去触发事件，而事件的订阅端为客户端。为了说明问题，我重新命名了一些函数和事件名，代码如下：远程对象：using...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/kkkkkxiaofei">来自：	<span class="blog_title"> 追</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident recommend-other-item-box" data-track-view='{"mod":"popu_387","con":",https://bbs.csdn.net/topics/390266510,BlogCommendFromBaidu_27"}' data-track-click='{"mod":"popu_387","con":",https://bbs.csdn.net/topics/390266510,BlogCommendFromBaidu_27"}'>
+		<a href="https://bbs.csdn.net/topics/390266510" target="_blank">
+			<h4 class="text-truncate oneline">
+					.Net中<em>remoting</em>是什么，主要是做什么用的			</h4>
+			<div class="info-box d-flex align-content-center">
+					<span class="date">11-01</span>
+			</div>
+			<p class="content oneline">
+        <span class="desc oneline">.Net中remoting是什么，主要是做什么用的？能否给个例子看看，谢谢！</span>
+                  <span class="type-show type-show-bbs">论坛</span>
+        			</p>
+		</a>
+
+	</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_64" data-pid="64" data-track-view='{"mod":"kp_popu_64-809","con":",,"}' data-track-click='{"mod":"kp_popu_64-809","con":",,"}'><script
+    async="async"
+    charset="utf-8"
+    src="https://shared.ydstatic.com/js/yatdk/3.0.1/stream.js"
+    data-id="6cb24153a03289ff3597c7aab4b69fe9"
+    data-div-Style="width:100%;"
+data-tit-Style="margin-bottom: 6px; font-size: 18px; line-height: 24px; color: #3d3d3d;display: inline-block;font-weight:bold;"
+data-des-Style="font-size: 13px; line-height: 22px; white-space: normal; color: #999;"
+data-img-Style="float:left;margin-right:15px;width:90px;height:60px;">
+</script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/kunshan_shenbin/article/details/5723043,BlogCommendFromBaidu_28"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/kunshan_shenbin/article/details/5723043,BlogCommendFromBaidu_28"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/kunshan_shenbin/article/details/5723043" target="_blank" title="图解C#中实现远程调用(Remoting)的示例代码(一)">
+				<h4 class="text-truncate oneline">
+						图解<em>C#</em>中实现<em>远程调用</em>(<em>Remoting</em>)的示例代码(一)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">07-09</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1877</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/kunshan_shenbin/article/details/5723043" target="_blank" title="图解C#中实现远程调用(Remoting)的示例代码(一)">
+							<span class="desc oneline">图解C#中实现远程调用(Remoting)的示例代码(一)</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/kunshan_shenbin">来自：	<span class="blog_title">  【昆山人在上海】 </span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/jimmy668/article/details/43636591,BlogCommendFromBaidu_29"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/jimmy668/article/details/43636591,BlogCommendFromBaidu_29"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/jimmy668/article/details/43636591" target="_blank" title="c# remoting 小实例">
+				<h4 class="text-truncate oneline">
+						<em>c#</em> <em>remoting</em> 小实例				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">02-08</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							201</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/jimmy668/article/details/43636591" target="_blank" title="c# remoting 小实例">
+							<span class="desc oneline">///先定义接口///usingSystem;usingSystem.Text;namespaceIComm{//////sendmessagesdelegate//////publicdelegat...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/jimmy668">来自：	<span class="blog_title"> jimmy668的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident recommend-other-item-box" data-track-view='{"mod":"popu_387","con":",https://bbs.csdn.net/topics/370203721,BlogCommendFromBaidu_30"}' data-track-click='{"mod":"popu_387","con":",https://bbs.csdn.net/topics/370203721,BlogCommendFromBaidu_30"}'>
+		<a href="https://bbs.csdn.net/topics/370203721" target="_blank">
+			<h4 class="text-truncate oneline">
+					<em>c#</em> 关于<em>remoting</em>通信结果判断，在线等			</h4>
+			<div class="info-box d-flex align-content-center">
+					<span class="date">09-21</span>
+			</div>
+			<p class="content oneline">
+        <span class="desc oneline">当client端将内容传送给server端后，如何判断是否通知成功。 //处理发送业务，公共接口程序集中，定义了一个公共委托。 public delegate void SendHandler(str</span>
+                  <span class="type-show type-show-bbs">论坛</span>
+        			</p>
+		</a>
+
+	</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/flyingdream123/article/details/6360635,BlogCommendFromBaidu_31"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/flyingdream123/article/details/6360635,BlogCommendFromBaidu_31"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/flyingdream123/article/details/6360635" target="_blank" title="C# Remoting Event 远程事件总结">
+				<h4 class="text-truncate oneline">
+						<em>C#</em> <em>Remoting</em> Event 远程事件总结				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">04-25</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1580</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/flyingdream123/article/details/6360635" target="_blank" title="C# Remoting Event 远程事件总结">
+							<span class="desc oneline">C#RemotingEvent远程事件总结</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/flyingdream123">来自：	<span class="blog_title"> flyingdream123的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/bmoon/article/details/3347698,BlogCommendFromBaidu_32"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/bmoon/article/details/3347698,BlogCommendFromBaidu_32"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/bmoon/article/details/3347698" target="_blank" title="C# Remoting的一个简单例子 ">
+				<h4 class="text-truncate oneline">
+						<em>C#</em> <em>Remoting</em>的一个简单例子 				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-21</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/bmoon/article/details/3347698" target="_blank" title="C# Remoting的一个简单例子 ">
+							<span class="desc oneline"> C#Remoting的一个简单例子.Net对于远程调用提供了两种方法：Remoting和WebService。WebService现在是如火如荼，特别是有一种比较流行的架构：Winform+WebS...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/bmoon">来自：	<span class="blog_title"> bmoon的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_65" data-pid="65" data-track-view='{"mod":"kp_popu_65-809","con":",,"}' data-track-click='{"mod":"kp_popu_65-809","con":",,"}'><script
+    async="async"
+    charset="utf-8"
+    src="https://shared.ydstatic.com/js/yatdk/3.0.1/stream.js"
+    data-id="6cb24153a03289ff3597c7aab4b69fe9"
+    data-div-Style="width:100%;"
+data-tit-Style="margin-bottom: 6px; font-size: 18px; line-height: 24px; color: #3d3d3d;display: inline-block;font-weight:bold;"
+data-des-Style="font-size: 13px; line-height: 22px; white-space: normal; color: #999;"
+data-img-Style="float:left;margin-right:15px;width:90px;height:60px;">
+</script></div></div>
+    
+    			<div class="recommend-item-box recommend-box-ident recommend-download-box clearfix" data-track-view='{"mod":"popu_387","con":",https://download.csdn.net/download/wangjunkongmin/2737152,BlogCommendFromBaidu_33"}' data-track-click='{"mod":"popu_387","con":",https://download.csdn.net/download/wangjunkongmin/2737152,BlogCommendFromBaidu_33"}'>
+			<a href="https://download.csdn.net/download/wangjunkongmin/2737152" target="_blank">
+				<div class="content clearfix">
+					<div class="">
+						<h4 class="text-truncate oneline clearfix">
+							<em>C#</em><em>Remoting</em>超简单实例						</h4>
+						<span class="data float-right">10-06</span>
+					</div>
+					<div class="desc oneline">
+							一个非常简单的Remoting实例，适合Remoting入门学习，					</div>
+          <span class="type-show type-show-download">下载</span>
+				</div>
+			</a>
+		</div>
+	
+    
+    
+    			<div class="recommend-item-box recommend-box-ident recommend-download-box clearfix" data-track-view='{"mod":"popu_387","con":",https://download.csdn.net/download/WalkerToMoon/966032,BlogCommendFromBaidu_34"}' data-track-click='{"mod":"popu_387","con":",https://download.csdn.net/download/WalkerToMoon/966032,BlogCommendFromBaidu_34"}'>
+			<a href="https://download.csdn.net/download/WalkerToMoon/966032" target="_blank">
+				<div class="content clearfix">
+					<div class="">
+						<h4 class="text-truncate oneline clearfix">
+							<em>C#</em> <em>Remoting</em>技术的完整实例						</h4>
+						<span class="data float-right">01-13</span>
+					</div>
+					<div class="desc oneline">
+							C# Remoting技术的完整实例。 包括GUC共享程序集的引用；通过配置文件动态加载时的详细设置（一般例子不会给出详细的文件配置，这是经过几天公关总结出来的，很珍贵！）。					</div>
+          <span class="type-show type-show-download">下载</span>
+				</div>
+			</a>
+		</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/zhengyanming2005/article/details/6935005,BlogCommendFromBaidu_35"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/zhengyanming2005/article/details/6935005,BlogCommendFromBaidu_35"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zhengyanming2005/article/details/6935005" target="_blank" title="C# Remoting Demo">
+				<h4 class="text-truncate oneline">
+						<em>C#</em> <em>Remoting</em> Demo				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-04</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1589</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zhengyanming2005/article/details/6935005" target="_blank" title="C# Remoting Demo">
+							<span class="desc oneline">什么是Remoting，简而言之，我们可以将其看作是一种分布式处理方式。从微软的产品角度来看，可以说Remoting就是DCOM的一种升级，它改善了很多功能，并极好的融合到.Net平台下。Micros...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/zhengyanming2005">来自：	<span class="blog_title"> 小铭的命名空间</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/liwateryi/article/details/52923336,BlogCommendFromBaidu_36"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/liwateryi/article/details/52923336,BlogCommendFromBaidu_36"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/liwateryi/article/details/52923336" target="_blank" title="C# Remoting TcpChannel">
+				<h4 class="text-truncate oneline">
+						<em>C#</em> <em>Remoting</em> TcpChannel				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">10-25</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1914</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/liwateryi/article/details/52923336" target="_blank" title="C# Remoting TcpChannel">
+							<span class="desc oneline">namespaceRM_Client{classProgram{staticvoidMain(string[]args){//HttpChannelchan2=newHttpChannel();//T...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/liwateryi">来自：	<span class="blog_title"> liwateryi的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/CNHK1225/article/details/50350290,BlogCommendFromBaidu_37"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/CNHK1225/article/details/50350290,BlogCommendFromBaidu_37"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/CNHK1225/article/details/50350290" target="_blank" title=".NET Remoting 使用总结">
+				<h4 class="text-truncate oneline">
+						.NET <em>Remoting</em> 使用总结				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">12-18</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							9308</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/CNHK1225/article/details/50350290" target="_blank" title=".NET Remoting 使用总结">
+							<span class="desc oneline">http://blog.163.com/henan_lujun/blog/static/19538333200781324449126/2、Remoting技术的应用       根据需求，我们的系统...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/CNHK1225">来自：	<span class="blog_title"> 发展是曲折的但也是前进的</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_66" data-pid="66" data-track-view='{"mod":"kp_popu_66-881","con":",,"}' data-track-click='{"mod":"kp_popu_66-881","con":",,"}'><script src="https://nbrecsys.4paradigm.com/resource/cus/csdn/sdk-csdn-render.js"></script>
+<div
+  id="_4paradigm_T38_render"
+  class="_paradigm_T_ads_render _4paradigm_box recommend-item-box clearfix"
+></div>
+<script>
+  //  渲染T38  传入 渲染位置的id和渲染位置的标记
+  p4CSDNRender_T("_4paradigm_T38_render", "T38");
+</script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/hjessica/article/details/4230851,BlogCommendFromBaidu_38"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/hjessica/article/details/4230851,BlogCommendFromBaidu_38"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/hjessica/article/details/4230851" target="_blank" title="c# 的TCP方式 remoting 通信">
+				<h4 class="text-truncate oneline">
+						<em>c#</em> 的TCP方式 <em>remoting</em> 通信				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-01</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							951</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/hjessica/article/details/4230851" target="_blank" title="c# 的TCP方式 remoting 通信">
+							<span class="desc oneline">服务器端：//注册Remoting服务，TCP方式intport_DB;//通讯端口 stringservice_DB;//注册服务名    TcpChannelch_DB;//通讯通道//如果htt...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/hjessica">来自：	<span class="blog_title"> JoeHan的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/mss359681091/article/details/53352993,BlogCommendFromBaidu_39"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/mss359681091/article/details/53352993,BlogCommendFromBaidu_39"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/mss359681091/article/details/53352993" target="_blank" title="WCF、Net remoting、Web service概念及区别">
+				<h4 class="text-truncate oneline">
+						WCF、Net <em>remoting</em>、Web service概念及区别				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-26</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2516</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/mss359681091/article/details/53352993" target="_blank" title="WCF、Net remoting、Web service概念及区别">
+							<span class="desc oneline">Windows通信基础（WindowsCommunicationFoundation，WCF）是基于Windows平台下开发和部署服务的软件开发包（SoftwareDevelopmentKit，SDK...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/mss359681091">来自：	<span class="blog_title"> 李赛赛的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/wantsfly/article/details/479557,BlogCommendFromBaidu_40"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/wantsfly/article/details/479557,BlogCommendFromBaidu_40"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wantsfly/article/details/479557" target="_blank" title="Microsoft .Net Remoting系列专题之三：Remoting事件处理全接触 ">
+				<h4 class="text-truncate oneline">
+						Microsoft .Net <em>Remoting</em>系列专题之三：<em>Remoting</em>事件处理全接触 				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-13</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							5275</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wantsfly/article/details/479557" target="_blank" title="Microsoft .Net Remoting系列专题之三：Remoting事件处理全接触 ">
+							<span class="desc oneline">前言：在Remoting中处理事件其实并不复杂，但其中有些技巧需要你去挖掘出来。正是这些技巧，仿佛森严的壁垒，让许多人望而生畏，或者是不知所谓，最后放弃了事件在Remoting的使用。关于这个主题，在...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/wantsfly">来自：	<span class="blog_title"> 冯钰 的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/CoderJYF/article/details/53489829,BlogCommendFromBaidu_41"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/CoderJYF/article/details/53489829,BlogCommendFromBaidu_41"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/CoderJYF/article/details/53489829" target="_blank" title=".Net中Remoting通信机制">
+				<h4 class="text-truncate oneline">
+						.Net中<em>Remoting</em>通信机制				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">12-06</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2151</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/CoderJYF/article/details/53489829" target="_blank" title=".Net中Remoting通信机制">
+							<span class="desc oneline">Remoting通信机制Remoting介绍主要元素通道类型激活方式对象定义Remoting介绍什么是Remoting，简而言之，我们可以将其看作是一种分布式处理方式。从微软的产品角度来看，可以说Re...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/CoderJYF">来自：	<span class="blog_title"> JiYF笨男孩</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/java_xiaofengfeng/article/details/8455397,BlogCommendFromBaidu_42"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/java_xiaofengfeng/article/details/8455397,BlogCommendFromBaidu_42"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/java_xiaofengfeng/article/details/8455397" target="_blank" title="C#采用Remoting实现跨进程调用之代码实例">
+				<h4 class="text-truncate oneline">
+						<em>C#</em>采用<em>Remoting</em>实现跨进程调用之代码实例				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">12-31</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1894</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/java_xiaofengfeng/article/details/8455397" target="_blank" title="C#采用Remoting实现跨进程调用之代码实例">
+							<span class="desc oneline">前言 辛苦了几个月，期间第一次接触C#的东西，一直很忙碌，如今年底将至，停车场系统目前也即将交货，回顾自己在该系统中所实现的功能，开发过程中遇到的技术点滴，觉得有必要认真记录一下，以便日后翻阅。故以C...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/java_xiaofengfeng">来自：	<span class="blog_title"> Java_小峰峰的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_67" data-pid="67" data-track-view='{"mod":"kp_popu_67-882","con":",,"}' data-track-click='{"mod":"kp_popu_67-882","con":",,"}'><script src="https://nbrecsys.4paradigm.com/resource/cus/csdn/sdk-csdn-render.js"></script>
+<div
+  id="_4paradigm_T43_render"
+  class="_paradigm_T_ads_render _4paradigm_box recommend-item-box clearfix"
+></div>
+<script>
+  //  渲染T43  传入 渲染位置的id和渲染位置的标记
+  p4CSDNRender_T("_4paradigm_T43_render", "T43");
+</script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/nyzhl/article/details/2214596,BlogCommendFromBaidu_43"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/nyzhl/article/details/2214596,BlogCommendFromBaidu_43"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/nyzhl/article/details/2214596" target="_blank" title="C# .NET Remoting 简单应用示例">
+				<h4 class="text-truncate oneline">
+						<em>C#</em> .NET <em>Remoting</em> 简单应用示例				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">03-24</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1057</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/nyzhl/article/details/2214596" target="_blank" title="C# .NET Remoting 简单应用示例">
+							<span class="desc oneline"> 这个是Remoting中的HelloWorld using System;namespace zhl...{    public class Person:MarshalByRefObject   ...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/nyzhl">来自：	<span class="blog_title"> &amp;*焰火*&amp;天堂</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/java_xiaofengfeng/article/details/8277990,BlogCommendFromBaidu_44"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/java_xiaofengfeng/article/details/8277990,BlogCommendFromBaidu_44"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/java_xiaofengfeng/article/details/8277990" target="_blank" title="C#中利用remoting对应用程序跨进程调用">
+				<h4 class="text-truncate oneline">
+						<em>C#</em>中利用<em>remoting</em>对应用程序跨进程调用				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">12-10</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2098</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/java_xiaofengfeng/article/details/8277990" target="_blank" title="C#中利用remoting对应用程序跨进程调用">
+							<span class="desc oneline">项目需求：        因项目需求有变，需将目前系统拆分为单独的两个子系统，分别为图像监控系统，文件识别系统，做成单独DLL，便日后复用。        现针对拆分过程中，遇到C#中对于应用程序跨进...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/java_xiaofengfeng">来自：	<span class="blog_title"> Java_小峰峰的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    			<div class="recommend-item-box recommend-box-ident recommend-download-box clearfix" data-track-view='{"mod":"popu_387","con":",https://download.csdn.net/download/zhpfaff/5232277,BlogCommendFromBaidu_45"}' data-track-click='{"mod":"popu_387","con":",https://download.csdn.net/download/zhpfaff/5232277,BlogCommendFromBaidu_45"}'>
+			<a href="https://download.csdn.net/download/zhpfaff/5232277" target="_blank">
+				<div class="content clearfix">
+					<div class="">
+						<h4 class="text-truncate oneline clearfix">
+							<em>C#</em> 利用<em>remoting</em>制作局域网简单聊天室						</h4>
+						<span class="data float-right">04-08</span>
+					</div>
+					<div class="desc oneline">
+							学习remoting的一个测试，由服务端、客户端构成的一个简易局域网聊天室，均为winform，对C#初学者应该有点用。客户端使用udp查找服务端，通过remoting与服务端通信，服务端可对在线用户					</div>
+          <span class="type-show type-show-download">下载</span>
+				</div>
+			</a>
+		</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/kkkkkxiaofei/article/details/9167829,BlogCommendFromBaidu_46"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/kkkkkxiaofei/article/details/9167829,BlogCommendFromBaidu_46"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/kkkkkxiaofei/article/details/9167829" target="_blank" title="初探Remoting双向通信（二）">
+				<h4 class="text-truncate oneline">
+						初探<em>Remoting</em>双向通信（二）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-25</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2943</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/kkkkkxiaofei/article/details/9167829" target="_blank" title="初探Remoting双向通信（二）">
+							<span class="desc oneline">二、利用事件实现客户端向服务器通信   接着上一篇，按照我的思路，远程对象中定义的事件在客户端触发，而在服务器端订阅，应该可以成功。现在放弃之前的示例代码，自己重新写一个版本，代码如下：远程对象：us...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/kkkkkxiaofei">来自：	<span class="blog_title"> 追</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/bigpudding24/article/details/50369904,BlogCommendFromBaidu_47"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/bigpudding24/article/details/50369904,BlogCommendFromBaidu_47"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/bigpudding24/article/details/50369904" target="_blank" title="remoting与socket、web service的比较及实例">
+				<h4 class="text-truncate oneline">
+						<em>remoting</em>与socket、web service的比较及实例				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">12-21</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							3087</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/bigpudding24/article/details/50369904" target="_blank" title="remoting与socket、web service的比较及实例">
+							<span class="desc oneline">remoting基础      一种分布式处理方式，可以说是DCOM的一种升级      跨过应用程序域，与另外的应用程序域进行通信，即穿越边界      在remoting中是通过通道（channe...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/bigpudding24">来自：	<span class="blog_title"> Peter-H</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_68" data-pid="68" data-track-view='{"mod":"kp_popu_68-883","con":",,"}' data-track-click='{"mod":"kp_popu_68-883","con":",,"}'><!-- T48 位置 -->
+<script src="https://nbrecsys.4paradigm.com/resource/cus/csdn/sdk-csdn-render.js"></script>
+<div
+  id="_4paradigm_T48_render"
+  class="_paradigm_T_ads_render _4paradigm_box recommend-item-box clearfix"
+></div>
+<script>
+  //  渲染T48  传入 渲染位置的id和渲染位置的标记
+  p4CSDNRender_T("_4paradigm_T48_render", "T48");
+</script></div></div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/iteye_3224/article/details/81498558,BlogCommendFromBaidu_48"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/iteye_3224/article/details/81498558,BlogCommendFromBaidu_48"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/iteye_3224/article/details/81498558" target="_blank" title=".Net Remoting配置文件的用法">
+				<h4 class="text-truncate oneline">
+						.Net <em>Remoting</em>配置文件的用法				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-21</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							12</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/iteye_3224/article/details/81498558" target="_blank" title=".Net Remoting配置文件的用法">
+							<span class="desc oneline">Howtouse.NetRemotingConfigurationfiles.NETRemotingconfigurationfilesallowyoutospecifyparametersformo...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/iteye_3224">来自：	<span class="blog_title"> 网站开发初中级代码参考-转载</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    			<div class="recommend-item-box recommend-box-ident recommend-download-box clearfix" data-track-view='{"mod":"popu_387","con":",https://download.csdn.net/download/frank_20080215/8481251,BlogCommendFromBaidu_49"}' data-track-click='{"mod":"popu_387","con":",https://download.csdn.net/download/frank_20080215/8481251,BlogCommendFromBaidu_49"}'>
+			<a href="https://download.csdn.net/download/frank_20080215/8481251" target="_blank">
+				<div class="content clearfix">
+					<div class="">
+						<h4 class="text-truncate oneline clearfix">
+							<em>C#</em> Web服务高级编程——使用_NET+<em>Remoting</em>和ASP_NET创建Web服务						</h4>
+						<span class="data float-right">03-07</span>
+					</div>
+					<div class="desc oneline">
+							C# Web服务高级编程——使用_NET+Remoting和ASP_NET创建Web服务 有兴趣的人看看吧					</div>
+          <span class="type-show type-show-download">下载</span>
+				</div>
+			</a>
+		</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/tq384998430/article/details/53161192,BlogCommendHotData_0"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/tq384998430/article/details/53161192,BlogCommendHotData_0"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/tq384998430/article/details/53161192" target="_blank" title="使用/dev/mem内存映射的方式操作GPIO口">
+				<h4 class="text-truncate oneline">
+						使用/dev/mem内存映射的方式操作GPIO口				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-14</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/tq384998430/article/details/53161192" target="_blank" title="使用/dev/mem内存映射的方式操作GPIO口">
+							<span class="desc oneline">使用的是全志H3的芯片，运行Debian Desktop系统的ARM版本Armbian，要控制外部几个IO口，可以使用很多种方法，如果对GPIO的操作速度有要求就需要使用直接操作内存寄存器的方式来控制...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/tq384998430">来自：	<span class="blog_title"> 欢迎光临</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/ily6418031hwm/article/details/10713297,BlogCommendHotData_1"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/ily6418031hwm/article/details/10713297,BlogCommendHotData_1"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ily6418031hwm/article/details/10713297" target="_blank" title="图像内插-最近邻内插法">
+				<h4 class="text-truncate oneline">
+						图像内插-最近邻内插法				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">08-31</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							7393</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ily6418031hwm/article/details/10713297" target="_blank" title="图像内插-最近邻内插法">
+							<span class="desc oneline">一、图像内插-最近邻内插法
+1、数学原理
+
+
+     当一幅二维数字图像从源图像N*M被放为(j*N) * (k*M)目标图像是，参照数学斜率计算公式
+
+     必然有: (X1 – Xmin)/...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/ily6418031hwm">来自：	<span class="blog_title"> 清风似水流的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/qq_36892341/article/details/73918672,BlogCommendHotData_3"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/qq_36892341/article/details/73918672,BlogCommendHotData_3"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_36892341/article/details/73918672" target="_blank" title="linux上安装Docker(非常简单的安装方法)">
+				<h4 class="text-truncate oneline">
+						linux上安装Docker(非常简单的安装方法)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-29</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							23万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_36892341/article/details/73918672" target="_blank" title="linux上安装Docker(非常简单的安装方法)">
+							<span class="desc oneline">最近比较有空，大四出来实习几个月了，作为实习狗的我，被叫去研究Docker了，汗汗！
+
+Docker的三大核心概念：镜像、容器、仓库
+镜像：类似虚拟机的镜像、用俗话说就是安装文件。
+容器：类似一个轻量...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/qq_36892341">来自：	<span class="blog_title"> 我走小路的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/opensure/article/details/46453681,BlogCommendHotData_4"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/opensure/article/details/46453681,BlogCommendHotData_4"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/opensure/article/details/46453681" target="_blank" title="Hbase 布隆过滤器BloomFilter介绍">
+				<h4 class="text-truncate oneline">
+						Hbase 布隆过滤器BloomFilter介绍				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-11</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							3万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/opensure/article/details/46453681" target="_blank" title="Hbase 布隆过滤器BloomFilter介绍">
+							<span class="desc oneline">1、主要功能
+
+提高随机读的性能
+
+
+
+
+2、存储开销
+
+bloom filter的数据存在StoreFile的meta中，一旦写入无法更新，因为StoreFile是不可变的。Bloomfilter是...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/opensure">来自：	<span class="blog_title"> opensure的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/isea533/article/details/49806637,BlogCommendHotData_6"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/isea533/article/details/49806637,BlogCommendHotData_6"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/isea533/article/details/49806637" target="_blank" title="Docx4j 简单操作文字图片（包含页眉页脚和主体内容）">
+				<h4 class="text-truncate oneline">
+						Docx4j 简单操作文字图片（包含页眉页脚和主体内容）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-12</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							1万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/isea533/article/details/49806637" target="_blank" title="Docx4j 简单操作文字图片（包含页眉页脚和主体内容）">
+							<span class="desc oneline">docx4j官方提供了一些例子，本文只是其中一部分应用的简单例子。需要注意的地方是页眉和页脚，必须创建对应关系才能起作用。页眉和页脚添加图片的时候，第二个参数sourcePart是必须的，调用的cre...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/isea533">来自：	<span class="blog_title"> 偶尔记一下</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/q383965374/article/details/41249959,BlogCommendHotData_7"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/q383965374/article/details/41249959,BlogCommendHotData_7"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/q383965374/article/details/41249959" target="_blank" title="maven项目生成的war包在tomcat下运行报错">
+				<h4 class="text-truncate oneline">
+						maven项目生成的war包在tomcat下运行报错				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">11-19</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							3万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/q383965374/article/details/41249959" target="_blank" title="maven项目生成的war包在tomcat下运行报错">
+							<span class="desc oneline">maven项目在tomcat</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/q383965374">来自：	<span class="blog_title"> 直到世界的尽头</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/ChinaJane163/article/details/52611335,BlogCommendHotData_8"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/ChinaJane163/article/details/52611335,BlogCommendHotData_8"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ChinaJane163/article/details/52611335" target="_blank" title="五子棋（人机）-alpha-beta剪枝">
+				<h4 class="text-truncate oneline">
+						五子棋（人机）-alpha-beta剪枝				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">09-21</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							3681</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ChinaJane163/article/details/52611335" target="_blank" title="五子棋（人机）-alpha-beta剪枝">
+							<span class="desc oneline">alpha：表示目前为止找到的最小数
+beta：表示目前为止找到的最大数
+1.极大层的上一层是极小层。一方面极大层找的是自己的子节点中的最大值，另一方面极大层的上一层找的是极大层们提供的节点中的最小一...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/ChinaJane163">来自：	<span class="blog_title"> 脚踏实地，仰望星空</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/maokaijiang/article/details/6069035,BlogCommendHotData_9"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/maokaijiang/article/details/6069035,BlogCommendHotData_9"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/maokaijiang/article/details/6069035" target="_blank" title="致命错误LNK1168的解决方法">
+				<h4 class="text-truncate oneline">
+						致命错误LNK1168的解决方法				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">12-11</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							2813</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/maokaijiang/article/details/6069035" target="_blank" title="致命错误LNK1168的解决方法">
+							<span class="desc oneline">   一般这个错误时不能打开应用程序进行写操作，有可能是该程序已经运行，不让写，所以会出现链接错误！打开任务管理器将其终止即可！！...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/maokaijiang">来自：	<span class="blog_title"> maokaijiang的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/tony2278/article/details/74931859,BlogCommendHotData_13"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/tony2278/article/details/74931859,BlogCommendHotData_13"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/tony2278/article/details/74931859" target="_blank" title="数据融合（data fusion）">
+				<h4 class="text-truncate oneline">
+						数据融合（data fusion）				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">07-10</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							926</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/tony2278/article/details/74931859" target="_blank" title="数据融合（data fusion）">
+							<span class="desc oneline">data fusion</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/tony2278">来自：	<span class="blog_title"> tony2278的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/hero_fantao/article/details/34533533,BlogCommendHotData_14"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/hero_fantao/article/details/34533533,BlogCommendHotData_14"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/hero_fantao/article/details/34533533" target="_blank" title="连续特征离散化和归一化">
+				<h4 class="text-truncate oneline">
+						连续特征离散化和归一化				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-25</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/hero_fantao/article/details/34533533" target="_blank" title="连续特征离散化和归一化">
+							<span class="desc oneline">连续特征进行离散化处理。</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/hero_fantao">来自：	<span class="blog_title"> hero_fantao的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/Smile_qiqi/article/details/32724931,BlogCommendHotData_15"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/Smile_qiqi/article/details/32724931,BlogCommendHotData_15"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/Smile_qiqi/article/details/32724931" target="_blank" title="魔兽争霸3冰封王座1.24e 多开联机补丁 信息发布与收集点">
+				<h4 class="text-truncate oneline">
+						魔兽争霸3冰封王座1.24e 多开联机补丁 信息发布与收集点				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">06-20</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							3万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/Smile_qiqi/article/details/32724931" target="_blank" title="魔兽争霸3冰封王座1.24e 多开联机补丁 信息发布与收集点">
+							<span class="desc oneline">畅所欲言！</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/Smile_qiqi">来自：	<span class="blog_title"> Smile_qiqi的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/jiangjunshow/article/details/77338485,BlogCommendHotData_16"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/jiangjunshow/article/details/77338485,BlogCommendHotData_16"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/jiangjunshow/article/details/77338485" target="_blank" title="人工智能教程 - 前言">
+				<h4 class="text-truncate oneline">
+						人工智能教程 - 前言				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">02-27</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							13万+</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/jiangjunshow/article/details/77338485" target="_blank" title="人工智能教程 - 前言">
+							<span class="desc oneline">兄弟姐妹们，如需转载请标明出处：http://blog.csdn.net/jiangjunshow
+
+总目录
+
+各位乡亲父老们！人工智能，马上就要爆发了。一旦爆发，将会如黄河泛滥一发不可收拾。...</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/jiangjunshow">来自：	<span class="blog_title"> 床长的专栏</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_387","con":",https://blog.csdn.net/mdjxy63/article/details/74783712,BlogCommendHotData_17"}' data-track-click='{"mod":"popu_387","con":",https://blog.csdn.net/mdjxy63/article/details/74783712,BlogCommendHotData_17"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/mdjxy63/article/details/74783712" target="_blank" title="ubuntu自带版本python和anaconda的python进行版本切换">
+				<h4 class="text-truncate oneline">
+						ubuntu自带版本python和anaconda的python进行版本切换				</h4>
+				<div class="info-box d-flex align-content-center">
+					<p class="date-and-readNum oneline">
+						<span class="date hover-show">07-08</span>
+						<span class="read-num hover-hide">
+              阅读数 
+							4168</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/mdjxy63/article/details/74783712" target="_blank" title="ubuntu自带版本python和anaconda的python进行版本切换">
+							<span class="desc oneline">http://blog.csdn.net/zhangxinyu11021130/article/details/64125058</span>
+						</a>
+						  <span class="blog_title_box oneline ">
+							                <span class="type-show type-show-blog type-show-after">博文</span>
+                                  <a target="_blank" href="https://blog.csdn.net/mdjxy63">来自：	<span class="blog_title"> mdjxy63的博客</span></a>
+                							              </span>
+					</p>
+			</div>
+					</div>
+	
+    
+    
+        <div class="recommend-item-box type_hot_word">
+            <div class="content clearfix">
+        <div class="word float-left">
+                          <span>
+            <a href="https://edu.csdn.net/combos/o363_l0_t " target="_blank">
+            设计制作学习          </a></span>
+                                  <span>
+            <a href="https://edu.csdn.net/courses/o5329_s5330_k " target="_blank">
+            机器学习教程          </a></span>
+                                  <span>
+            <a href="https://edu.csdn.net/courses/o280_s351_k " target="_blank">
+            Objective-C培训          </a></span>
+                                  <span>
+            <a href="https://edu.csdn.net/combos/o7115_s388_l0_t " target="_blank">
+            交互设计视频教程          </a></span>
+                                  <span>
+            <a href="https://edu.csdn.net/course/play/5599/104252 " target="_blank">
+            颜色模型          </a></span>
+                        </div>
+      </div>
+                  <div class="content clearfix">
+        <div class="float-left">
+                  <span>
+            <a href="https://www.csdn.net/gather_24/MtTaEg3sMDM5MS1ibG9n.html" target="_blank">
+            mysql关联查询两次本表</a>
+          </span>
+                  <span>
+            <a href="https://www.csdn.net/gather_10/MtjaIg3sMTUzMy1kb3dubG9hZAO0O0OO0O0O.html" target="_blank">
+            native底部 react</a>
+          </span>
+                  <span>
+            <a href="https://www.csdn.net/gather_1b/Ntzagg1sOTU3LWRvd25sb2Fk.html" target="_blank">
+            extjs glyph 图标</a>
+          </span>
+                  <span>
+            <a href="https://www.csdn.net/gather_4a/NtzaIg4sMTktZWR1.html" target="_blank">
+            java远程调用学习</a>
+          </span>
+                  <span>
+            <a href="https://www.csdn.net/gather_4a/NtzaQg5sMzQtZWR1.html" target="_blank">
+            java转c#学习</a>
+          </span>
+                </div>
+      </div>
+          </div>
+
+
+            <div class="recommend-loading-box">
+                <img src='https://csdnimg.cn/release/phoenix/images/feedLoading.gif'>
+            </div>
+            <div class="recommend-end-box">
+                <p class="text-center">没有更多推荐了，<a href="https://blog.csdn.net/" class="c-blue c-blue-hover c-blue-focus">返回首页</a></p>
+            </div>
+        </div>
+    </main>
+
+    <aside>
+		    <div id="asideProfile" class="aside-box">
+    <!-- <h3 class="aside-title">个人资料</h3> -->
+    <div class="profile-intro d-flex">
+        <div class="avatar-box d-flex justify-content-center flex-column">
+            <a href="https://blog.csdn.net/evenhbz">
+              <img src="https://avatar.csdn.net/6/B/D/3_evenhbz.jpg" class="avatar_pic">
+                              <img src="https://g.csdnimg.cn/static/user-reg-year/1x/11.png" class="user-years">
+                          </a>
+            
+        </div>
+        <div class="user-info d-flex justify-content-center flex-column">
+            <p class="name csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a href="https://blog.csdn.net/evenhbz" target="_blank" class="" id="uid">evenhbz</a>
+            </p>
+                    </div>
+                <div class="opt-box d-flex justify-content-center flex-column">
+            <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a class="btn btn-sm btn-red-hollow attention" id="btnAttent">关注</a>
+            </span>
+        </div>
+            </div>
+    <div class="data-info d-flex item-tiling">
+                <dl class="text-center" title="0">
+                        <dt>原创</dt>
+            <dd><span class="count">0</span></dd>
+                    </dl>
+        <dl class="text-center" id="fanBox" title="1">
+            <dt>粉丝</dt>
+            <dd><span class="count" id="fan">1</span></dd>
+        </dl>
+        <dl class="text-center" title="0">
+            <dt>喜欢</dt>
+            <dd><span class="count">0</span></dd>
+        </dl>
+        <dl class="text-center" title="0">
+            <dt>评论</dt>
+            <dd><span class="count">0</span></dd>
+        </dl>
+    </div>
+    <div class="grade-box clearfix">
+        <dl>
+            <dt>等级：</dt>
+            <dd>
+                <a href="https://blog.csdn.net/home/help.html#level" title="1级,点击查看等级说明" target="_blank">
+                    <svg class="icon icon-level" aria-hidden="true">
+                        <use xlink:href="#csdnc-bloglevel-1"></use>
+                    </svg>
+                </a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>访问：</dt>
+            <dd title="1010">
+                1010            </dd>
+        </dl>
+        <dl>
+            <dt>积分：</dt>
+            <dd title="0">
+                0            </dd>
+        </dl>
+        <dl title="3906235">
+            <dt>排名：</dt>
+            <dd>390万+</dd>
+        </dl>
+    </div>
+    </div>
+		    <div class="csdn-tracking-statistics mb8 box-shadow" data-pid="blog" data-mod="popu_4" style="height:250px;">
+    <div class="aside-content text-center" id="cpro_u2734133">
+      <div id="kp_box_56" data-pid="56" data-track-view='{"mod":"kp_popu_56-876","con":",,"}' data-track-click='{"mod":"kp_popu_56-876","con":",,"}'><!-- 广告位：PC-博客内页左上视窗 -->
+<script>
+(function() {
+    var s = "_" + Math.random().toString(36).slice(2);
+    document.write('<div id="' + s + '"></div>');
+    (window.slotbydup=window.slotbydup || []).push({
+        id: '6096221',
+        container: s,
+        size: '300,250',
+        display: 'inlay-fix'
+    });
+})();
+</script>
+<script src="//dup.baidustatic.com/js/os.js"></script></div>    </div>
+</div>
+		    <div id="asideNewArticle" class="aside-box">
+    <h3 class="aside-title">最新文章</h3>
+    <div class="aside-content">
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/evenhbz/article/details/84537175" target="_blank">WPF 多语言</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/evenhbz/article/details/84535006" target="_blank">P/Invoke DllImport[] 托管代码访问非托管dll的函数</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/evenhbz/article/details/84534717" target="_blank">杂项。。</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/evenhbz/article/details/84529512" target="_blank">ControlTemplate和DataTemplate      Trigger，EventTrigger和DataTrigger</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/evenhbz/article/details/84466941" target="_blank">忙碌状态下转圈的实现</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+		    		    <div id="asideCategory" class="aside-box flexible-box">
+    <h3 class="aside-title">个人分类</h3>
+    <div class="aside-content">
+        <ul>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8147056">
+                    <span class="title oneline">.NET(C# —— Web)</span>
+                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8147061">
+                    <span class="title oneline">.NET(C# —— WPF)</span>
+                    <span class="count float-right">9篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8147062">
+                    <span class="title oneline">.NET(C# —— WinForm)</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8147059">
+                    <span class="title oneline">NHibernate</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8147063">
+                    <span class="title oneline">SQL server</span>
+                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8147065">
+                    <span class="title oneline">JavaScript</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8147067">
+                    <span class="title oneline">Remoting &amp; Webservice</span>
+                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8335761">
+                    <span class="title oneline">Socket</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8338776">
+                    <span class="title oneline">.NET(C# —— WCF)</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8357495">
+                    <span class="title oneline">C++</span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8370960">
+                    <span class="title oneline">Web</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8371703">
+                    <span class="title oneline">线程</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8372352">
+                    <span class="title oneline">WCF</span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8373146">
+                    <span class="title oneline">异步与同步（Synchronization&amp; Asynchronism)）</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8373376">
+                    <span class="title oneline">小技巧</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8374939">
+                    <span class="title oneline">设计模式</span>
+                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8375540">
+                    <span class="title oneline">.Net FrameWork</span>
+                    <span class="count float-right">10篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8375835">
+                    <span class="title oneline">Database</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8382141">
+                    <span class="title oneline">XML</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8383211">
+                    <span class="title oneline">算法</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8383363">
+                    <span class="title oneline">数据结构</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8411552">
+                    <span class="title oneline">EF (Entity Framework)</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/evenhbz/article/category/8419632">
+                    <span class="title oneline">语法</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideArchive" class="aside-box flexible-box">
+    <h3 class="aside-title">归档</h3>
+    <div class="aside-content">
+        <ul class="archive-list">
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2014/03">
+                    2014年3月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2014/02">
+                    2014年2月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2013/08">
+                    2013年8月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2013/05">
+                    2013年5月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2013/04">
+                    2013年4月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2013/03">
+                    2013年3月                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2013/02">
+                    2013年2月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2012/12">
+                    2012年12月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2012/11">
+                    2012年11月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2012/10">
+                    2012年10月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2012/09">
+                    2012年9月                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2012/07">
+                    2012年7月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2012/05">
+                    2012年5月                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2012/04">
+                    2012年4月                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2012/03">
+                    2012年3月                    <span class="count float-right">11篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2012/02">
+                    2012年2月                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2011/11">
+                    2011年11月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2011/08">
+                    2011年8月                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2011/07">
+                    2011年7月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/evenhbz/article/month/2011/05">
+                    2011年5月                    <span class="count float-right">9篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideHotArticle" class="aside-box">
+	<h3 class="aside-title">热门文章</h3>
+	<div class="aside-content">
+		<ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+							<li>
+					<a href="https://blog.csdn.net/evenhbz/article/details/83984149">远程调用——Remoting（C# ）（转）</a>
+					<p class="read">阅读数 <span>85</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/evenhbz/article/details/84322811">wpf 的依赖属性和附加属性的区别</a>
+					<p class="read">阅读数 <span>64</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/evenhbz/article/details/84168202">remoting与socket、webservice和wcf的比较及优势（转）</a>
+					<p class="read">阅读数 <span>52</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/evenhbz/article/details/84263006">Sql server 新创建的用户无法登录</a>
+					<p class="read">阅读数 <span>44</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/evenhbz/article/details/84398815">EF+SQL server 转为 EF+SQLite</a>
+					<p class="read">阅读数 <span>36</span></p>
+				</li>
+					</ul>
+	</div>
+</div>
+		    		<div id="asideFooter">
+			
+		<div class="aside-box">
+			<div id="kp_box_57" data-pid="57" data-track-view='{"mod":"kp_popu_57-77","con":",,"}' data-track-click='{"mod":"kp_popu_57-77","con":",,"}'><script type="text/javascript">
+    (function() {
+        var s = "_" + Math.random().toString(36).slice(2);
+        document.write('<div style="" id="' + s + '"></div>');
+        (window.slotbydup = window.slotbydup || []).push({
+            id: "u3163270",
+            container:  s
+        });
+    })();
+</script>
+<!-- 多条广告如下脚本只需引入一次 -->
+<script type="text/javascript" src="//cpro.baidustatic.com/cpro/ui/c.js" async="async" defer="defer" ></script></div>		</div>
+				<div class="aside-box">
+			<div class="persion_article">
+			</div>
+		</div>
+	</div>
+</aside>
+<script src="https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js" data-isfootertrack="false" type="text/javascript"></script>
+<script>
+	$("a.flexible-btn").click(function(){
+		$(this).parents('div.aside-box').removeClass('flexible-box');
+		$(this).remove();
+	})
+</script>
+</div>
+<div class="mask-dark"></div>
+<div class="tool-box">
+	<ul class="meau-list">
+		<li class="btn-like-box ">
+			<button class=" low-height hover-box btn-like " title="点赞">
+				<svg class="icon active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup-ok"></use>
+				</svg>
+				<svg class="icon no-active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup"></use>
+				</svg>
+				<span class="hover-show text-box text">
+					<span class="no-active">点赞</span>
+					<span class="active">取消点赞</span>
+				</span>
+				<p>0</p>
+			</button>
+		</li>
+		<li class="">
+						<a class="btn-comments low-height hover-box" title="写评论" href="#commentBox">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-comments"></use>
+				</svg>
+				<span class="hover-show text">评论</span>
+				<p class="">
+										</p>
+			</a>
+		</li>
+		<li class="toc-container-box" id="liTocBox">
+			<button class="btn-toc low-height hover-box" title="目录">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-contents"></use>
+				</svg>
+				<span class="hover-show text">目录</span>
+			</button>
+			<div class="toc-container">
+				<div class="pos-box">
+					<div class="icon-arrow"></div>
+					<div class="scroll-box">
+						<div class="toc-box"></div>
+					</div>
+				</div>
+				<div class="opt-box">
+					<button class="btn-opt prev nomore" title="向上">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronup"></use>
+						</svg>
+					</button>
+					<button class="btn-opt next">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevrondown"></use>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</li>
+		<li>
+			<button class="btn-bookmark low-height hover-box" title="收藏">
+				<svg class="icon active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark-ok"></use>
+				</svg>
+				<svg class="icon no-active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark"></use>
+				</svg>
+					<span class="hover-show text">收藏</span>
+				<!-- <span class="hover-show text-box text">
+					<span class="no-active">收藏</span>
+					<span class="active">取消收藏</span>
+				</span> -->
+			</button>
+		</li>
+		<li class="bdsharebuttonbox">
+			<div class="weixin-qr btn-comments low-height hover-box" >
+        <a href="#" class="bds_weixin clear-share-style" data-cmd="weixin" title="手机看"></a>
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-usephone"></use>
+				</svg>
+				<span class="hover-show text text3">
+					手机看
+				</span>
+			</div>
+		</li>
+							<li class="widescreen-hide">
+				<a class="btn-comments low-height hover-box" href="https://blog.csdn.net/evenhbz/article/details/83984016" title="托管代码&amp;非托管代码（转）">
+					<svg class="icon hover-hide" aria-hidden="true">
+						<use xlink:href="#csdnc-chevronleft"></use>
+					</svg>
+					<span class="hover-show text text3">上一篇</span>
+				</a>
+			</li>
+								<li class="widescreen-hide">
+			<a class="btn-comments hover-box low-height" href="https://blog.csdn.net/evenhbz/article/details/83984424" title="WCF入门">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-chevronright"></use>
+				</svg>
+				<span class="hover-show text text3">下一篇</span>
+			</a>
+		</li>
+						<!-- 宽屏更多按钮 -->
+		<li class="widescreen-more">
+			<a class="btn-comments chat-ask-button low-height hover-box" title="快问" href="#chatqa">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-more"></use>
+				</svg>
+				<span class="hover-show text">更多</span>
+				
+			</a>
+			<ul class="widescreen-more-box">
+													<li class="widescreen-more">
+						<a class="btn-comments low-height hover-box" href="https://blog.csdn.net/evenhbz/article/details/83984016" title="托管代码&amp;非托管代码（转）">
+							<svg class="icon hover-hide" aria-hidden="true">
+								<use xlink:href="#csdnc-chevronleft"></use>
+							</svg>
+							<span class="hover-show text text3">上一篇</span>
+						</a>
+					</li>
+																<li class="widescreen-more">
+					<a class="btn-comments hover-box low-height" href="https://blog.csdn.net/evenhbz/article/details/83984424" title="WCF入门">
+						<svg class="icon hover-hide" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronright"></use>
+						</svg>
+						<span class="hover-show text text3">下一篇</span>
+					</a>
+				</li>
+							</ul>
+		</li>
+	</ul>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script>
+    var recommendCount = 63;
+    recommendCount = recommendCount > 1 ? (recommendCount + (recommendCount>6 ? 2 : 1)) : recommendCount;
+    var articleTit = articleTitles;
+    var ChannelId = 16;
+    var articleId = "83984149";
+    var commentscount = 0;
+    var islock = false;
+    var curentUrl = "https://blog.csdn.net/evenhbz/article/details/83984149";
+    var myUrl = "https://my.csdn.net/";
+    //1禁止评论，2正常
+    var commentAuth = 0;
+    //百度搜索
+    var baiduKey = "远程调用——Remoting（C# ）（转） - My Code Library";
+    var needInsertBaidu = true;
+    // 代码段样式
+    var codeStyle = '';
+		var highlight = ["\u8fdc\u7a0b\u8c03\u7528","remoting","c#"];//高亮数组
+		// 相关推荐博主数据
+    var RecommendBlogExpertList = [];
+	var articleType = 1;
+	var CopyrightContent = '';
+    var current_user_name = 'jinwenmao';
+</script>
+<script src="https://csdnimg.cn/public/sandalstrap/1.4/js/sandalstrap.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.js"></script>
+<script src="https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201904241615"></script><script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            showReport(false,articleTit);
+        }
+    })
+</script>
+</body>
+
+<!-- 高亮未与 markdown兼容  -->
+	<link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.3.9/ckeditor/plugins/chart/chart.css" />
+	<script type="text/javascript" src="https://csdnimg.cn/release/blog_editor_html/release1.3.9/ckeditor/plugins/chart/lib/chart.min.js"></script>
+	<script type="text/javascript" src="https://csdnimg.cn/release/blog_editor_html/release1.3.9/ckeditor/plugins/chart/widget2chart.js"></script>
+	<link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.3.9/ckeditor/plugins/codesnippet/lib/highlight/styles/atom-one-light.css">
+	<script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/pc_wap_common-3bc59f8f2b.js" /></script>
+
+	<script type="text/javascript">
+	$(function(){
+		var allEscRegex = /&(lt|gt|amp|quot|nbsp|shy|#\d{1,5});/g,
+		    namedEntities = {
+					lt: '<',
+					gt: '>',
+					amp: '&',
+					quot: '"',
+					nbsp: '\u00a0',
+					shy: '\u00ad'
+				}
+		var allEscDecode = function( match, code ) {
+				return namedEntities[ code ];
+		};
+		htmlDecodeAttr = function( text ) {
+				return text.replace( allEscRegex, allEscDecode );
+		}
+	  hljs.initHighlighting();
+	  hljs.initCopyButtonOnLoad();
+	  hljs.initLineNumbersOnLoad();
+		if($('pre .language-plain').length>0){
+			$('pre .language-plain').each(function(i,e){
+				var highlightRe = hljs.highlightAuto(htmlDecodeAttr(e.innerHTML))
+				e.innerHTML = highlightRe.value;
+				e.className = 'language-'+highlightRe.language;
+			});
+		}
+	})
+	</script>
+
+<script src="//g.csdnimg.cn/??login-box/1.0.5/login-box.js,login-box/1.0.5/login-auto.js?t=20190307095522"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/common-0100d9c3da.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/detail-8752043e22.min.js"></script>
+
+	<script src="https://csdnimg.cn/release/phoenix/themes/skin3-template/skin3-template-fc7383b956.min.js"></script>
+
+<script src="//g.csdnimg.cn/baidu-search/1.0.0/baidu-search.js"  type="text/javascript"></script>
+
+
+<!-- <script type="text/javascript" src="//g.csdnimg.cn/check-adb/1.0.2/check-adb.js"></script> -->
+
+<script type="text/javascript" src="https://csdnimg.cn/release/blog_mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            "HTML-CSS": {
+                    linebreaks: { automatic: true, width: "94%container" },
+                    imageFont: null
+            },
+            tex2jax: {
+                preview: "none"
+            },
+            mml2jax: {
+                preview: 'none'
+            }
+    });
+</script>
+<script type="text/javascript">
+    </script>
+<script src="https://gh.bdstatic.com/static/gh/js/sdk/bword.min.js"></script>
+</html>
